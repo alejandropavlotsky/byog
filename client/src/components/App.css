@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+body {
+  font-weight: 300;
+  font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, strong {
+  font-weight: 400;
+}
+
+h1 {
+  margin-bottom: 30px;
+}
+
+a, a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.navbar {
+  margin-bottom: 40px
+}
+
+.toast {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 99999;
+  width: 350px
+}
+
+.error-message {
+  background: red;
+  color: white;
+  padding: 10px
+}
