@@ -4,9 +4,13 @@
 .game-details{
     margin-bottom: 50px;
 }
-.align-items{
+.image-button-game-detail{
     display:flex;
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-between;
+    margin-bottom: 50px;
+}
+.image-button-game-detail img{
+    margin-bottom: 50px;
 }

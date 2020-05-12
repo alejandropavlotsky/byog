@@ -34,19 +34,14 @@ class GameDetails extends Component {
         return (
             <Container as="section" className="game-details">
                 <h1>{this.state.title}</h1>
-                <hr />
-                <Row>
-                    <Col md={6} className="align-items">
+                <Row as="article">
+                    <Col md={{span: 5, offset: 1}} className="image-button-game-detail">
                         <img src={this.state.gameImg} alt={this.state.title}></img>
                         <Link to="/games" className="btn btn-success">Volver</Link>
-
                     </Col>
                     <Col md={{ span: 5 }}>
-                        <h4>Info</h4>
-                        <p>{this.state.description}</p>
                         <h4>Detalles</h4>
                         <hr/>
-
                         <p> <strong>Autor:</strong> {this.state.author}</p>
                         <hr/>
                         <p> <strong>Tema:</strong> {this.state.theme}</p>
@@ -70,6 +65,12 @@ class GameDetails extends Component {
                         <p> <strong>Idioma:</strong> {this.state.language}</p>                       
                     </Col>
                     
+                </Row>
+                <Row>
+                    <Col md={{span: 10, offset: 1}}>
+                         <h4>Info</h4>
+                        <p>{this.state.description}</p>
+                    </Col>
                 </Row>
             </Container>
         )

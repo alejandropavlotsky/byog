@@ -10,7 +10,7 @@ export default class services {
 
     getGames = () => this.service.get('/')
     getGame = gameId => this.service.get(`/${gameId}/details`)
-    // saveGame = theGame => this.service.post(`/new-game`, theGame)
+    saveGame = theGame => this.service.post(`/new-game`, theGame)
     // editGame = theGameEdit => this.service.put(`/${theGameEdit}/edit`, theGameEdit)
     // deleteGame = theGameDelete => this.service.delete(`/${theGameDelete}/delete`, theGameDelete)
 }

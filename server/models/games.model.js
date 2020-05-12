@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const utils = require('../../client/src/utils/gameDificultyOptions')
 
 const gameSchema = new Schema({
     title: String,
@@ -12,7 +13,7 @@ const gameSchema = new Schema({
     gameTime: String,
     difficulty: {
         type: String,
-        enum: ["Facil", "Medio", "Dificil", "Muy Dificil"],
+        enum: utils.map(elm => elm.label),
     },
     price: String,
     language: String,

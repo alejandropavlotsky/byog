@@ -74,7 +74,7 @@ class GameList extends Component {
 
                 <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                     <Modal.Body>
-                        <GameForm finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
+                        <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
                     </Modal.Body>
                 </Modal>
 

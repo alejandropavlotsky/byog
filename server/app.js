@@ -21,5 +21,6 @@ app.use('/api', require('./routes/auth.routes'))
 app.use('/api/games', require('./routes/games.routes'))
 app.use('/api/events', require('./routes/events.routes'))
 app.use('/api/users', require('./routes/users.routes'))
+app.use('/api/files', require('./routes/files.routes'))
 
 module.exports = app
