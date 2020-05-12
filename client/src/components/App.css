@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Manrope:200,400,700&display=swap');
 body {
   font-weight: 300;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 h1, h2, h3, h4, strong {
@@ -19,6 +19,16 @@ a, a:hover {
 .navbar {
   margin-bottom: 40px
 }
+.navbar img{
+  width:100px;
+}
+.nav-logout{
+  cursor:pointer;
+}
+.navbar-nav{
+  width:100%;
+}
+
 
 .toast {
   position: fixed;

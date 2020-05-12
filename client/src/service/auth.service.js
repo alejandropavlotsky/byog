@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class services {
+export default class AuthService {
     constructor() {
         this.service = axios.create({
             baseURL: 'http://localhost:5000/api',

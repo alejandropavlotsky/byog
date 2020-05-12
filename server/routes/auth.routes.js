@@ -52,7 +52,6 @@ router.post('/signup', (req, res, next) => {
             // Automatically log in user after sign up
             // .login() here is actually predefined passport method
             req.login(aNewUser, (err) => {
-
                 if (err) {
                     res.status(500).json({ message: 'Login after signup went bad.' });
                     return;
@@ -72,7 +71,9 @@ router.post('/signup', (req, res, next) => {
 
 
 router.post('/login', (req, res, next) => {
+
     passport.authenticate('local', (err, theUser, failureDetails) => {
+        
         if (err) {
             res.status(500).json({ message: 'Something went wrong authenticating user' });
             return;
@@ -109,6 +110,7 @@ router.post('/logout', (req, res, next) => {
 
 router.get('/loggedin', (req, res, next) => {
     // req.isAuthenticated() is defined by passport
+
     if (req.isAuthenticated()) {
         res.status(200).json(req.user);
         return;
@@ -116,58 +118,4 @@ router.get('/loggedin', (req, res, next) => {
     res.status(403).json({ message: 'Unauthorized' });
 });
 
-
-
-
-
 module.exports = router
-
-
-
-
-/*
-
-
-const express = require("express")
-const router = express.Router()
-const passport = require("passport")
-
-const User = require("../models/user.model")
-const bcrypt = require("bcrypt")
-
-
-
-router.post('/signup', (req, res, next) => {
-
-    const { username, password } = req.body
-
-    if (!username || !password) {
-        res.status(400).json({ message: 'Rellena el usuario y contraseña' });
-        return;
-    }
-
-    if (password.length < 1) {
-        res.status(400).json({ message: 'La contraseña debe tener mínimo 3 caracteres' });
-        return;
-    }
-
-    User.findOne({ username })
-        .then(foundUser => {
-            if (foundUser) {
-                res.status(400).json({ message: 'Username taken. Choose another one.' })
-                return
-            } else {
-                const salt = bcrypt.genSaltSync(10);
-                const hashPass = bcrypt.hashSync(password, salt);
-                return User.create({ username, password: hashPass })
-            }
-        })
-        .catch(() => res.status(500).json({ message: "Username check went bad." }))
-        .then(createdUser => req.login(createdUser))
-        .catch(() => res.status(400).json({ message: 'Login after signup went bad.' }))
-        .then(loggedUser => res.status(200).json(loggedUser))
-        .catch(() => res.status(400).json({ message: 'Saving user to database went wrong.' }))
-
-})
-
-*/

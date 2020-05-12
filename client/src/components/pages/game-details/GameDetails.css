@@ -1,0 +1,12 @@
+.game-details img {
+    width: 100%
+}
+.game-details{
+    margin-bottom: 50px;
+}
+.align-items{
+    display:flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-between;
+}
