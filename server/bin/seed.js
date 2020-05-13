@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
 require("dotenv").config();
+const mongoose = require('mongoose')
 const bcrypt = require("bcrypt")
 const bcryptSalt = 10
 const salt = bcrypt.genSaltSync(bcryptSalt)
-
+const moment = require('moment')
 const Games = require('../models/games.model')
 const User = require('../models/user.model')
 const Review = require('../models/review.model')
@@ -72,35 +72,32 @@ const events = [
         title: "noche de juegos",
         description: "Tengo la casa pra mi solo, asi que organizo noche de juegos para el/la que quiera venir",
         location: "Calle Alcala 200",
-        attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 05, 10),
-        gameHour: Date(0, 0, 0, 20, 00)
-    },      
+        attendance: 6,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+    },  
     {
         title: "noche de juegos",
         description: "Os invito a jugar a mi mansion",
         location: "Calle Alcala 180",
-        attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 06, 10),
-        gameHour: Date(0, 0, 0, 20, 00)
+        attendance: 4,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+
 
     },
     {
         title: "Noche de trivial",
         description: "Por favor el que tenga el trivial que lo traiga, yo pongo la casa y la comida :D",
         location: "Calle Toledo 10",
-        attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 05, 25),
-        gameHour: Date(0, 0, 0, 20, 00)
+        attendance: 7,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
 
     },    
     {
         title: "Maraton de Time Stories",
         description: "Pues eso, jugamos al Time Stories hasta que aguante el cuerpo",
         location: "Calle Toledo 25",
-        attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 04, 25),
-        gameHour: Date(0, 0, 0, 20, 00)
+        attendance: 10,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
 
     }  
 ]
@@ -426,6 +423,7 @@ User.create(users)
                     .then(() => Review.findByIdAndUpdate(allGameReviews[1], {author: allUsers[1], reviewedInGame: allGames[1]}, {new:true}))
                     .then(() => Review.findByIdAndUpdate(allGameReviews[2], {author: allUsers[2], reviewedInGame: allGames[2]}, {new:true}))
                     .then(() => Review.findByIdAndUpdate(allGameReviews[3], {author: allUsers[3], reviewedInGame: allGames[3]}, {new:true}))
+                    .then(() => mongoose.connection.close())
                     .catch(err => console.log(err))            
         })
     })

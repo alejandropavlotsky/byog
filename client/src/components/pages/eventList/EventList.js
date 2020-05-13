@@ -14,8 +14,8 @@ import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 
 class EventsList extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             modalShow: false,
             toast: {
@@ -51,7 +51,6 @@ class EventsList extends Component {
         this.handleToast(true, 'Registro creado en la BBDD')
     }
 
-
     render() {
         return (
             <Container as="section">
@@ -62,7 +61,7 @@ class EventsList extends Component {
 
                 <Row className="events-list">
                     {this.state.events.map(elm => <EventCard key={elm._id} {...elm}/>)}
-            </Row>
+                </Row>
 
                 <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                     <Modal.Body>

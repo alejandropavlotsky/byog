@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 
 router.get('/:eventId/details', (req, res, next) => {
     Event.findById(req.params.eventId)
-        // .populate('author')
+        .populate('author')
         // .populate('reviews')
         .then(data => res.json(data))
         .catch(err => console.log(err))

@@ -3,6 +3,7 @@ import EventService from '../../../service/events.service'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import moment from 'moment'
 
 class EventForm extends Component {
     constructor(props) {
@@ -20,16 +21,26 @@ class EventForm extends Component {
     }
 
     handleInputChange = e => {
-        const { name, value } = e.target
-        
+        const { name, value, valueAsDate } = e.target
+        if (name === "gameTime" || name === "gameHour") {
+            this.setState({
+                [`${name}AsDate`]: valueAsDate.toUTCString(),
+            })
+        }
         this.setState({
-            [name]: value
+
+            [name]: value,
         })
     }
 
+
     handleSubmit = e => {
         e.preventDefault()
-        this.eventService.saveEvent(this.state)
+        const { gameTimeAsDate, gameHourAsDate } = this.state
+        const gameHourMoment = moment(gameHourAsDate).parseZone()
+        const gameDate = moment(gameTimeAsDate).parseZone().hour(gameHourMoment.hour()).minute(gameHourMoment.minute())
+        console.log(gameDate, gameHourMoment, gameHourAsDate)
+        this.eventService.saveEvent({...this.state, gameDate})
             .then(() => this.props.finishEventPost())
             .catch(err => console.log(err))
 }
@@ -53,7 +64,7 @@ class EventForm extends Component {
                         <Form.Control name="location" type="text" size="sm" value={this.state.location} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="attendance">
-                        <Form.Label>Capacidad máxima</Form.Label>
+                        <Form.Label>Capacidad m?xima de asistentes</Form.Label>
                         <Form.Control name="attendance" type="number" size="sm" value={this.state.attendance} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="gameTime">
