@@ -8,6 +8,8 @@ import './App.css'
 import Navigation from './ui/navbar/Navbar'
 import GameList from './pages/gameList/GameList'
 import GameDetails from './pages/game-details/GameDetails'
+import EventsList from './pages/eventList/EventList'
+import EventDetails from './pages/eventDetails/EventDetails'
 import Signup from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
@@ -47,6 +49,8 @@ class App extends Component {
           <Switch>
             <Route path="/games" exact render={() => <GameList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/games/:gameId/details" exact render={props => <GameDetails {...props} />} />
+            <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} />} />
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />

@@ -8,6 +8,7 @@ const eventSchema = new Schema({
     location: String,
     attendance: String,
     gameTime: Date,
+    gameHour: Date,
     reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }]
 }, {
     timestamps: true

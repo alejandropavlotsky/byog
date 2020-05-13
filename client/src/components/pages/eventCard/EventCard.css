@@ -1,0 +1,10 @@
+.name-and-image{
+    display:flex;
+    align-items:center;
+    margin-bottom: 16px;
+}
+.user-image{
+    width: 50px;
+    border-radius: 50%;
+    margin: 0 24px 0 0;
+}

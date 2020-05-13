@@ -40,7 +40,6 @@ class GameForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        console.log("Antes de enviar")
         this.gameService.saveGame(this.state)
             .then(() => this.props.finishGamePost())
             .catch(err => console.log(err))

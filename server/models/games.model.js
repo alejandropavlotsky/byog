@@ -13,7 +13,7 @@ const gameSchema = new Schema({
     gameTime: String,
     difficulty: {
         type: String,
-        enum: utils.map(elm => elm.label),
+        enum: utils.map(elm => elm.label)
     },
     price: String,
     language: String,

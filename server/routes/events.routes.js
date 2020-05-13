@@ -2,15 +2,19 @@ const express = require('express')
 const router = express.Router()
 
 const Event = require('../models/events.model')
+const User = require('../models/user.model')
 
 router.get('/', (req, res, next) => {
     Event.find()
+        .populate('author')
         .then(data => res.json(data))
         .catch(err => console.log(err))
 })
 
 router.get('/:eventId/details', (req, res, next) => {
     Event.findById(req.params.eventId)
+        // .populate('author')
+        // .populate('reviews')
         .then(data => res.json(data))
         .catch(err => console.log(err))
 })

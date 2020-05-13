@@ -32,37 +32,37 @@ const users = [
     {
         username: "Erica",
         password: bcrypt.hashSync('135', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     },
     {
         username: "Hilario",
         password: bcrypt.hashSync('246', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     },
     {
         username: "Solano",
         password: bcrypt.hashSync('357', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     },
     {
         username: "Blanca",
         password: bcrypt.hashSync('468', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     },
     {
         username: "Ornella",
         password: bcrypt.hashSync('579', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     },
     {
         username: "Claus",
         password: bcrypt.hashSync('680', salt),
-        userImg: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
         favorites: []
     }
 ]
@@ -73,28 +73,35 @@ const events = [
         description: "Tengo la casa pra mi solo, asi que organizo noche de juegos para el/la que quiera venir",
         location: "Calle Alcala 200",
         attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 05, 10, 20, 00)
+        gameTime: Date(2020, 05, 10),
+        gameHour: Date(0, 0, 0, 20, 00)
     },      
     {
         title: "noche de juegos",
         description: "Os invito a jugar a mi mansion",
         location: "Calle Alcala 180",
         attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 06, 10, 21, 00)
+        gameTime: Date(2020, 06, 10),
+        gameHour: Date(0, 0, 0, 20, 00)
+
     },
     {
         title: "Noche de trivial",
         description: "Por favor el que tenga el trivial que lo traiga, yo pongo la casa y la comida :D",
         location: "Calle Toledo 10",
         attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 05, 25, 12, 00),
+        gameTime: Date(2020, 05, 25),
+        gameHour: Date(0, 0, 0, 20, 00)
+
     },    
     {
         title: "Maraton de Time Stories",
         description: "Pues eso, jugamos al Time Stories hasta que aguante el cuerpo",
         location: "Calle Toledo 25",
         attendance: "Confirmar asistencia",
-        gameTime: Date(2020, 04, 25, 12, 00),
+        gameTime: Date(2020, 04, 25),
+        gameHour: Date(0, 0, 0, 20, 00)
+
     }  
 ]
 
