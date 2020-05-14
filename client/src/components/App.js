@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-
 import { Switch, Route, Redirect } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-
+import GameService from './../service/game.service'
+import EventService from './../service/events.service'
 import Navigation from './ui/navbar/Navbar'
 import GameList from './pages/gameList/GameList'
 import GameDetails from './pages/game-details/GameDetails'
@@ -18,39 +18,43 @@ import AuthService from './../service/auth.service'
 
 class App extends Component {
 
-  constructor() {
-    super()
-    this.state = { loggedInUser: null }
+  constructor(props) {
+    super(props)
+    this.state = {
+      loggedInUser: null,
+      games: [],
+      events: []
+    }
     this.authService = new AuthService()
+    this.gameService = new GameService()
+    this.eventService = new EventService()
   }
 
 
   setTheUser = userObj => this.setState({ loggedInUser: userObj }, () => console.log('El estado de App ha cambiado:', this.state))
 
-  fetchUser = () => {
-    if (this.state.loggedInUser === null) {
-      this.authService.isLoggedIn()
-        .then(response => this.setTheUser(response.data))
-        .catch(() => this.setTheUser(false))
-    }
-  }
+  // fetchUser = () => {
+  //   if (this.state.loggedInUser === null) {
+  //     this.authService.isLoggedIn()
+  //       .then(response => this.setTheUser(response.data))
+  //       .catch(() => this.setTheUser(false))
+  //   }
+  // }
 
+    render() {
 
-  render() {
-
-    this.fetchUser()
+    // this.fetchUser()
 
     return (
       <>
         <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
-
         <main>
 
           <Switch>
             <Route path="/games" exact render={() => <GameList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/games/:gameId/details" exact render={props => <GameDetails {...props} />} />
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
-            <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} />} />
+            <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
