@@ -17,6 +17,11 @@ require('./configs/views.configs')(app)
 require('./configs/locals.config')(app)
 
 // Base URLS
+app.use((req, res) => {
+    res.sendFile(__dirname + "/public/index.html")
+})
+app.use("/api", require("/routes"))
+
 app.use('/api', require('./routes/auth.routes'))
 app.use('/api/games', require('./routes/games.routes'))
 app.use('/api/events', require('./routes/events.routes'))

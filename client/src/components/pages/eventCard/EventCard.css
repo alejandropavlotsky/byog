@@ -8,3 +8,9 @@
     border-radius: 50%;
     margin: 0 24px 0 0;
 }
+article{
+    margin: 16px;
+}
+.class-card{
+    padding: 0;
+}

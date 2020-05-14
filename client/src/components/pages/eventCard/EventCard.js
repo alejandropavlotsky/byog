@@ -6,7 +6,7 @@ import Card from 'react-bootstrap/Card'
 
 const EventCard = props => {
     return (
-        <Col lg={3} md={6}>
+        <Col lg={3} md={6} className="class-card">
             <Card as="article">
                 <Card.Body>
                     <Card.Title>{props.title}</Card.Title>

@@ -43,9 +43,6 @@ class EventDetails extends Component {
         this.setState({
             assitance: [...this.state.event.assistance]
         })
-        console.log(this.props.loggedInUser.username)
-
-        console.log(this.state.event.assistance)
     }
 
     getEventInfo() {
