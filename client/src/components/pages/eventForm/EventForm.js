@@ -52,19 +52,19 @@ class EventForm extends Component {
                 <hr />
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="title">
-                        <Form.Label>Titulo</Form.Label>
+                        <Form.Label>T&#237;tulo</Form.Label>
                         <Form.Control name="title" type="text" size="sm" value={this.state.title} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="description">
-                        <Form.Label>Descripci?n</Form.Label>
+                        <Form.Label>Descripci&#243;n</Form.Label>
                         <Form.Control name="description" type="text" size="sm" value={this.state.description} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="location">
-                        <Form.Label>Direcci?n:</Form.Label>
+                        <Form.Label>Direcci&#243;n:</Form.Label>
                         <Form.Control name="location" type="text" size="sm" value={this.state.location} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="attendance">
-                        <Form.Label>Capacidad m?xima de asistentes</Form.Label>
+                        <Form.Label>Capacidad m&#225;xima de asistentes</Form.Label>
                         <Form.Control name="attendance" type="number" size="sm" value={this.state.attendance} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Form.Group controlId="gameTime">

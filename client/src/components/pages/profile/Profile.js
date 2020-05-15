@@ -29,7 +29,7 @@ class Profile extends Component {
         return (
             <>
                 <Container>
-                    <h1>¡Bienvend@, {this.props.loggedInUser.username}!</h1>
+                    <h1>&#161;Bienvend@, {this.props.loggedInUser.username}!</h1>
                     {
                         !this.state.profileData ? null :
                             <>

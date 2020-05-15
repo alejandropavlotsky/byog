@@ -5,7 +5,10 @@ const userSchema = new Schema(
 	{
 		username: String,
         password: String,
-        userImage: String,
+		userImage: {
+			type: String,
+			default: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg"
+		},
         favorites: [{ type: Schema.Types.ObjectId, ref: "Juegos"}]
 	},
 	{

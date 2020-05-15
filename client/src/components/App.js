@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
+import Home from './pages/home/Home'
 import GameService from './../service/game.service'
 import EventService from './../service/events.service'
 import Navigation from './ui/navbar/Navbar'
@@ -51,6 +52,7 @@ class App extends Component {
         <main>
 
           <Switch>
+            <Route path="/" exact render={props => <Home {...props}/>}/>
             <Route path="/games" exact render={() => <GameList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/games/:gameId/details" exact render={props => <GameDetails {...props} />} />
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />

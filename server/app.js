@@ -23,6 +23,7 @@ app.use('/api/games', require('./routes/games.routes'))
 app.use('/api/events', require('./routes/events.routes'))
 app.use('/api/users', require('./routes/users.routes'))
 app.use('/api/files', require('./routes/files.routes'))
+app.use('/api/review', require('./routes/review.routes'))
 
 app.use((req,res)=>{
 res.sendFile(__dirname+"/public/index.html");

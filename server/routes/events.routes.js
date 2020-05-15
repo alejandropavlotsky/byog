@@ -8,7 +8,8 @@ router.get('/', (req, res, next) => {
     Event.find()
         .populate('author')
         .then(data => res.json(data))
-        .catch(err => console.log(err))
+        .catch(err => next(new Error(err)))
+
 })
 
 router.get('/:eventId/details', (req, res, next) => {
@@ -16,21 +17,24 @@ router.get('/:eventId/details', (req, res, next) => {
         .populate('author')
         // .populate('reviews')
         .then(data => res.json(data))
-        .catch(err => console.log(err))
+        .catch(err => next(new Error(err)))
+
 })
 
 
 router.put('/:eventId/edit', (req, res, next) => {
     Event.findByIdAndUpdate(req.params.eventId, req.body)
         .then(data => res.json(data))
-        .catch(err => console.log(err))
+        .catch(err => next(new Error(err)))
+
 
 })
 
 router.delete('/:eventId/delete', (req, res, next) => {
     Event.findByIdAndRemove(req.params.eventId)
         .then((response) => res.json(response))
-        .catch(err => console.log(err))
+        .catch(err => next(new Error(err)))
+
     
 })
 
@@ -38,7 +42,8 @@ router.delete('/:eventId/delete', (req, res, next) => {
 router.post('/new-event', (req, res, next) => {
     Event.create(req.body)
         .then(data => res.json(data))
-        .catch(err => console.log(err))
+        .catch(err => next(new Error(err)))
+
 })
 
 module.exports = router

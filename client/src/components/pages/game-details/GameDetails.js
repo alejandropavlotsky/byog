@@ -50,7 +50,7 @@ class GameDetails extends Component {
                         <p> <strong>Rango de edades:</strong> {this.state.ageRange}</p>
                         <hr/>
 
-                        <p> <strong>Numero de Jugadores:</strong> {this.state.numOfPlayers}</p>
+                        <p> <strong>N&#250;mero de Jugadores:</strong> {this.state.numOfPlayers}</p>
                         <hr/>
 
                         <p> <strong>Tiempo de Juego:</strong> {this.state.gameTime}</p>

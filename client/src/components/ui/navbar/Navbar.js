@@ -35,13 +35,13 @@ class Navigation extends Component {
                             {
                                 !this.props.loggedInUser ?
                                     <>
-                                        <Nav.Link as="div"><Link to="/login">Iniciar sesión</Link></Nav.Link>
+                                        <Nav.Link as="div"><Link to="/login">Iniciar sesi&#243;n</Link></Nav.Link>
                                         <Nav.Link as="div"><Link to="/signup">Registro</Link></Nav.Link>
                                     </>
                                     :
                                     <>
                                         <Nav.Link as="div"><Link to="/profile">Mi perfil</Link></Nav.Link>
-                                        <Nav.Link as="div" className="nav-link nav-logout" onClick={this.logout}>Cerrar sesión</Nav.Link>
+                                        <Nav.Link as="div" className="nav-link nav-logout" onClick={this.logout}>Cerrar sesi&#243;n</Nav.Link>
                                         <Navbar.Text className="ml-auto"> Hola, {this.props.loggedInUser && this.props.loggedInUser.username}</Navbar.Text>
                                     </>
                             }

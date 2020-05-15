@@ -48,7 +48,7 @@ class EventsList extends Component {
     finishEventPost = () => {
         this.getAllEvents()
         this.handleModal(false)
-        this.handleToast(true, 'Registro creado en la BBDD')
+        this.handleToast(true, 'El evento se ha creado con éxito')
     }
 
     render() {
@@ -69,11 +69,9 @@ class EventsList extends Component {
                     </Modal.Body>
                 </Modal>
 
-                <Toast onClose={() => this.handleToast(false)} show={this.state.toast.show} delay={3000} autohide>
-                    <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                        <strong className="mr-auto">Mensaje</strong>
-                    </Toast.Header>
+                <Toast onClose={() => this.handleToast(false)} show={this.state.toast.show} delay={4000} autohide>
+                    <Toast.Header><strong className="mr-auto">Mensaje</strong></Toast.Header>
+                    <Toast.Body>{this.state.toast.text}</Toast.Body>
                 </Toast>
             </Container>
         )

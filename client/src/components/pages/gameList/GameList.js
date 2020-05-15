@@ -53,7 +53,7 @@ class GameList extends Component {
     finishGamePost = () => {
         this.getAllGames()
         this.handleModal(false)
-        this.handletoast(true, 'Registro creado en BBDD')
+        this.handletoast(true, 'El juego se ha creado con éxito!')
     }
 
     render() {
@@ -79,11 +79,8 @@ class GameList extends Component {
                 </Modal>
 
 
-                <Toast onClose={() => this.handletoast(false)} show={this.state.toast.show} delay={3000} autohide>
-                    <Toast.Header>
-                        <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" />
-                        <strong className="mr-auto">Mensaje</strong>
-                    </Toast.Header>
+                <Toast variant="success" onClose={() => this.handletoast(false)} show={this.state.toast.show} delay={4000} autohide>
+                    <Toast.Header><strong className="mr-auto">Mensaje</strong></Toast.Header>
                     <Toast.Body>{this.state.toast.text}</Toast.Body>
                 </Toast>
 
