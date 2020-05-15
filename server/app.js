@@ -18,8 +18,7 @@ require('./configs/locals.config')(app)
 
 // Base URLS
 
-// app.use("/api",require("/routes"))
-
+app.use("/api",require("/routes"))
 
 
 app.use('/api', require('./routes/auth.routes'))
@@ -28,7 +27,7 @@ app.use('/api/events', require('./routes/events.routes'))
 app.use('/api/users', require('./routes/users.routes'))
 app.use('/api/files', require('./routes/files.routes'))
 
-// app.use((req,res)=>{
-// res.sendFile(__dirname+"/public/index.html");
-// })
+app.use((req,res)=>{
+res.sendFile(__dirname+"/public/index.html");
+})
 module.exports = app
