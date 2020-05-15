@@ -20,22 +20,22 @@ class EventDetails extends Component {
         this.state = {
             event: null,
             assistance: [],
-            // center: {
-            //     lat: props.lat,
-            //     lng: props.lng
-            // },
+            center: {
+                lat: props.lat,
+                lng: props.lng
+            },
             loggedInUser: this.props.loggedInUser
         }
         this.eventService = new EventService()
     }
 
-    // static defaultProps = {
-    //     center: {
-    //         lat: 40.420524,
-    //         lng: -3.705128
-    //     },
-    //     zoom: 16,
-    // }
+    static defaultProps = {
+        center: {
+            lat: 40.420524,
+            lng: -3.705128
+        },
+        zoom: 16,
+    }
 
     handleEventSign = e => {
         this.state.event.assistance.push(this.props.loggedInUser.username)
@@ -49,30 +49,30 @@ class EventDetails extends Component {
         const id = this.props.match.params.eventId
         console.log(this.props)
         this.eventService.getEvent(id)
-            .then(response => this.setState({ event: response.data }))
+            .then(response => this.setState({ event: response.data }, () => this.getGoogleMap()))
             .catch(err => console.log(err))
     }
 
 
-    // , () => this.getGoogleMap()
+   
 
 
-    // getGoogleMap() {
-    //     let location = this.state.event.location
-    //     let key = "AIzaSyA5zll-K3WnkRdKTRaRgbyeC_JkL76ygyM"
-    //     axios.get(
-    //         `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${key}`)
-    //         .then((geores) => {
-    //             let latitude = geores.data.results[0].geometry.location.lat
-    //             let longitude = geores.data.results[0].geometry.location.lng
-    //             this.setState({
-    //                 center: {
-    //                     lat: latitude,
-    //                     lng: longitude
-    //                 }
-    //             })
-    //         })
-    // }
+    getGoogleMap() {
+        let location = this.state.event.location
+        let key = "AIzaSyA5zll-K3WnkRdKTRaRgbyeC_JkL76ygyM"
+        axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${location}&key=${key}`)
+            .then((geores) => {
+                let latitude = geores.data.results[0].geometry.location.lat
+                let longitude = geores.data.results[0].geometry.location.lng
+                this.setState({
+                    center: {
+                        lat: latitude,
+                        lng: longitude
+                    }
+                })
+            })
+    }
 
     componentDidMount = () => { 
         this.getEventInfo()
@@ -87,7 +87,7 @@ class EventDetails extends Component {
     
                     <Row as="article">
                         <Col md={{ span: 5, offset: 1 }}>
-                            {/* <div id="map">
+                            <div id="map">
                                 <GoogleMapReact
                                     bootstrapURLKeys={{ key: "AIzaSyA5zll-K3WnkRdKTRaRgbyeC_JkL76ygyM" }}
                                     center={this.state.center}
@@ -97,7 +97,7 @@ class EventDetails extends Component {
                                         lng={this.state.center.lng}>
                                     </div>
                                 </GoogleMapReact>
-                            </div> */}
+                            </div>
                             <Link to="/events" className="btn btn-success">Volver</Link>
                             {
                                 this.state.loggedInUser &&

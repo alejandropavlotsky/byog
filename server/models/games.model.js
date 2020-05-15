@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const utils = require('../../client/src/utils/gameDificultyOptions')
+const utils = require('../utils/gameDificultyOptions')
 
 const gameSchema = new Schema({
     title: String,
