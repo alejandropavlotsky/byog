@@ -18,9 +18,6 @@ require('./configs/locals.config')(app)
 
 // Base URLS
 
-app.use("/api",require("/routes"))
-
-
 app.use('/api', require('./routes/auth.routes'))
 app.use('/api/games', require('./routes/games.routes'))
 app.use('/api/events', require('./routes/events.routes'))
