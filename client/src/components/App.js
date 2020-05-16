@@ -14,7 +14,7 @@ import EventDetails from './pages/eventDetails/EventDetails'
 import Signup from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
-
+import Footer from './ui/footer/Footer'
 import AuthService from './../service/auth.service'
 
 class App extends Component {
@@ -31,21 +31,9 @@ class App extends Component {
     this.eventService = new EventService()
   }
 
-
   setTheUser = userObj => this.setState({ loggedInUser: userObj }, () => console.log('El estado de App ha cambiado:', this.state))
 
-  // fetchUser = () => {
-  //   if (this.state.loggedInUser === null) {
-  //     this.authService.isLoggedIn()
-  //       .then(response => this.setTheUser(response.data))
-  //       .catch(() => this.setTheUser(false))
-  //   }
-  // }
-
     render() {
-
-    // this.fetchUser()
-
     return (
       <>
         <Navigation setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />
@@ -65,6 +53,7 @@ class App extends Component {
           </Switch>
 
         </main>
+        <Footer/>
       </>
     )
   }
