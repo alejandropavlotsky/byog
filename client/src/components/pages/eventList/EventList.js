@@ -56,7 +56,7 @@ class EventsList extends Component {
             <Container as="section">
                 <h1>Listado de Eventos</h1>
                 <Col md={{ span: 4, offset: 4 }}>
-                    {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }}>Crear nuevo evento</Button>}
+                    {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }} className="btn-one">Crear nuevo evento</Button>}
                 </Col>
 
                 <Row className="events-list">

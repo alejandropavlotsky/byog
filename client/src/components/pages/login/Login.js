@@ -75,7 +75,7 @@ class Login extends Component {
                                 style={{ display: this.state.errorMessage ? 'block' : 'none' }}
                             >{this.state.errorMessage}</p>
 
-                            <Button variant="success" type="submit">Iniciar sesión</Button>
+                            <Button variant="success" className="btn-one" type="submit">Iniciar sesión</Button>
                         </Form>
 
                         <p><small>¿No tienes cuenta? <Link to="/signup">Regístrate</Link></small></p>

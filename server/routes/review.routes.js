@@ -14,9 +14,16 @@ router.get('/', (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
+
+
 router.post('/new-post', (req, res, next) => {
     Review.create(req.body)
-        .then(data => res.json(data))
+        .then(data => {
+            if (req.body.typeOfReview === "Evento") {
+                Events.findByIdAndUpdate(req.body.reviewedInEvent, {  })
+            }
+            res.json(data)
+        })
         .catch(err => next(new Error(err)))
 })
 

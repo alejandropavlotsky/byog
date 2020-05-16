@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-
+import './Signup.css'
 import { Link } from 'react-router-dom'
 
 
@@ -75,7 +75,7 @@ class Signup extends Component {
                                 style={{ display: this.state.errorMessage ? 'block' : 'none' }}
                             >{this.state.errorMessage}</p>
 
-                            <Button variant="success" type="submit">Registrarme</Button>
+                            <Button variant="success" type="submit" className="btn-one">Registrarme</Button>
                         </Form>
 
                         <p><small>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></small></p>

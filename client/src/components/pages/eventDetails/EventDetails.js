@@ -1,20 +1,23 @@
 import React, { Component } from 'react'
 import EventService from '../../../service/events.service'
 import moment from 'moment'
+import axios from 'axios'
+
+import { Link } from 'react-router-dom'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Spinner from 'react-bootstrap/Spinner'
-import GoogleMapReact from 'google-map-react'
-import axios from 'axios'
-import ReviewForm from './../reviewForm/ReviewForm'
 import Toast from 'react-bootstrap/Toast'
+import GoogleMapReact from 'google-map-react'
 
+import ReviewForm from './../reviewForm/ReviewForm'
 import './EventDetails.css'
 
-import { Link } from 'react-router-dom'
+
 
 class EventDetails extends Component {
 
@@ -22,7 +25,6 @@ class EventDetails extends Component {
         super(props)
         this.state = {
             event: null,
-            assistance: [],
             center: {
                 lat: props.lat,
                 lng: props.lng
@@ -55,8 +57,9 @@ class EventDetails extends Component {
 
     handleEventSign = e => {
         const assistanceCopy = [...this.state.event.assistance]
-        assistanceCopy.push(this.props.loggedInUser.username)
-        this.setState({assistance: assistanceCopy})
+        assistanceCopy.push(this.props.loggedInUser._id)
+            this.eventService.editEvent({ ...this.state.event, assistance: assistanceCopy })
+                .then(console.log)
     }
 
     getEventInfo() {
@@ -93,15 +96,17 @@ class EventDetails extends Component {
         this.handleToast(true, 'El comentario se ha creado con Ã©xito!')
     }
 
+    
     render() {
+        
         if (this.state.event) {
-            const { author, title, description, location, attendance, assistanceCopy, gameDate, reviews } = this.state.event
+            const { author, title, description, location, attendance,  gameDate, reviews } = this.state.event
             return (
                 <Container as="section" className="event-details">
                     <h1>{title}</h1>
     
                     <Row as="article">
-                        <Col md={{ span: 5, offset: 1 }}>
+                        <Col md={{ span: 5, offset: 1 }} className="map-button-event-details">
                             <div id="map">
                                 <GoogleMapReact
                                     bootstrapURLKeys={{ key: "AIzaSyA5zll-K3WnkRdKTRaRgbyeC_JkL76ygyM" }}
@@ -113,11 +118,13 @@ class EventDetails extends Component {
                                     </div>
                                 </GoogleMapReact>
                             </div>
-                            <Link to="/events" className="btn btn-success">Volver</Link>
-                            {
-                                this.state.loggedInUser &&
-                                <Button onClick={this.handleEventSign} className="btn btn-success">Apuntarme</Button>   
-                            }
+                            <div className="event-details-buttons">
+                                <Link to="/events" className="btn btn-success btn-one">Volver</Link>
+                                {
+                                    this.state.loggedInUser &&
+                                    <Button onClick={this.handleEventSign} className="btn btn-success btn-one">Apuntarme</Button>   
+                                }
+                            </div>
                         </Col>
                         <Col md={{ span: 5 }}>
                             <h4>Detalles</h4>
@@ -130,17 +137,17 @@ class EventDetails extends Component {
                             <hr />
                             <p> <strong>Participantes:  </strong> {attendance} </p>
                             <hr />
-                            <p> <strong>Asistentes: </strong> {!assistanceCopy ? "0" : this.state.assistance.map(elm => elm.username)} </p>
+                            <p> <strong>Asistentes: </strong> {!this.state.event && !this.state.event.assistance ? "No hay nadie apuntado, todavía" : this.state.event.assistance.map(user => user.username).join(', ')} </p>
                             <hr/>
                             <p> <strong>Fecha: </strong> {moment(gameDate).format("DD/MM/YYYY h:mmA")} </p>
                             <hr />
-                            {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }}>Dejar Rese&ntilde;a</Button>}
+                            {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }} className="btn-one">Dejar Rese&ntilde;a</Button>}
                             <p> <strong>Rese&#241;as: </strong> {reviews} </p>
                         </Col>
                     </Row>
                     <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                         <Modal.Body>
-                            <ReviewForm loggedInUser={this.props.loggedInUser} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)}/>
+                            <ReviewForm loggedInUser={this.props.loggedInUser} eventId={this.state.event._id} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)}/>
                         </Modal.Body>
                     </Modal>
 

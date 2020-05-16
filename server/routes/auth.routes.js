@@ -14,7 +14,7 @@ router.post('/signup', (req, res, next) => {
 
 
     if (!username || !password) {
-        res.status(400).json({ message: 'Provide username and password' });
+        res.status(400).json({ message: 'Escribe un nombre de usuario y contraseña.' });
         return;
     }
 
@@ -31,7 +31,7 @@ router.post('/signup', (req, res, next) => {
         }
 
         if (foundUser) {
-            res.status(400).json({ message: 'Username taken. Choose another one.' });
+            res.status(400).json({ message: 'Este nombre de usuario ya existe, elige otro.' });
             return;
         }
 

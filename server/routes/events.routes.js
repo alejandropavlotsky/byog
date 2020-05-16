@@ -15,7 +15,8 @@ router.get('/', (req, res, next) => {
 router.get('/:eventId/details', (req, res, next) => {
     Event.findById(req.params.eventId)
         .populate('author')
-        // .populate('reviews')
+        .populate('assistance')
+        .populate('reviews')
         .then(data => res.json(data))
         .catch(err => next(new Error(err)))
 
@@ -23,6 +24,7 @@ router.get('/:eventId/details', (req, res, next) => {
 
 
 router.put('/:eventId/edit', (req, res, next) => {
+    // validacion de assistance antes de hacer findbyidandupdate
     Event.findByIdAndUpdate(req.params.eventId, req.body)
         .then(data => res.json(data))
         .catch(err => next(new Error(err)))

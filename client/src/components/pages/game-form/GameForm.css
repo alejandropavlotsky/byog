@@ -1,0 +1,10 @@
+.modal-content{
+    background-color: #29a744;
+    color:white;
+}
+.modal-content label, .modal-content h1{
+    color: white;
+}
+hr{
+    border: 1px solid white;
+}

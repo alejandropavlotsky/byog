@@ -76,8 +76,8 @@ class EventForm extends Component {
                         <Form.Control name="gameHour" type="time" size="sm" value={this.state.gameHour} onChange={this.handleInputChange} />
                     </Form.Group>
 
-                    <Button variant="success" onClick={() => this.props.closeModal()} style={{marginRight: "10px"}}>Cerrar</Button>
-                    <Button variant="success" type="submit">Crear Evento</Button>
+                    <Button variant="success" className="btn-one" onClick={() => this.props.closeModal()} style={{marginRight: "10px"}}>Cerrar</Button>
+                    <Button variant="success" className="btn-one" type="submit">Crear Evento</Button>
                 </Form>
             </Container>
         )

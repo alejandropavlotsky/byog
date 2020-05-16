@@ -62,7 +62,7 @@ class GameList extends Component {
             
                 <h1>Listado de juegos</h1>
                 <Col md={{ span: 4, offset: 4 }}>
-                    {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }}>Crear nuevo juego</Button>}
+                    {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }} className="btn-one">Crear nuevo juego</Button>}
 
                 </Col>
 

@@ -23,31 +23,26 @@ class Navigation extends Component {
 
         return (
             <Navbar bg="success" variant="dark" expand="md">
-                <Navbar.Brand as="div"><Link to="/"><img src="./../../../../img/logo.png" alt="logo"/></Link></Navbar.Brand>
+                
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav>
-                  
-                            <Nav.Link as="div"><Link to="/">Inicio</Link></Nav.Link>
-                            <Nav.Link as="div"><Link to="/games">Juegos</Link></Nav.Link>
-                            <Nav.Link as="div"><Link to="/events">Eventos</Link></Nav.Link>
-
+                            <Nav.Link as="div"><Link to="/games" className="btnnav btn-one">Juegos</Link></Nav.Link>
+                            <Nav.Link as="div"><Link to="/events" className="btnnav btn-one">Eventos</Link></Nav.Link>
+                            <Navbar.Brand as="div"><Link to="/"><img src="./../../../../img/logo.png" alt="logo"/></Link></Navbar.Brand>    
                             {
                                 !this.props.loggedInUser ?
                                     <>
-                                        <Nav.Link as="div"><Link to="/login">Iniciar sesi&#243;n</Link></Nav.Link>
-                                        <Nav.Link as="div"><Link to="/signup">Registro</Link></Nav.Link>
+                                        <Nav.Link as="div"><Link to="/login" className="btnnav btn-one">Iniciar sesi&#243;n</Link></Nav.Link>
+                                        <Nav.Link as="div"><Link to="/signup" className="btnnav btn-one">Registro</Link></Nav.Link>
                                     </>
                                     :
                                     <>
-                                        <Nav.Link as="div"><Link to="/profile">Mi perfil</Link></Nav.Link>
-                                        <Nav.Link as="div" className="nav-link nav-logout" onClick={this.logout}>Cerrar sesi&#243;n</Nav.Link>
+                                        <Nav.Link as="div"><Link to="/profile" className="btnnav btn-one">Mi perfil</Link></Nav.Link>
+                                        <Nav.Link as="div" className="nav-link nav-logout btnnav btn-one" onClick={this.logout} >Cerrar sesi&#243;n</Nav.Link>
                                         <Navbar.Text className="ml-auto"> Hola, {this.props.loggedInUser && this.props.loggedInUser.username}</Navbar.Text>
                                     </>
                             }
-          
-
-
                     </Nav>
                 </Navbar.Collapse>
 

@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class services {
     constructor() {
         this.service = axios.create({
-            baseURL: `${process.env.REACT_APP_API_URL}/reviews`,
+            baseURL: `${process.env.REACT_APP_API_URL}/review`,
             withCredentials: true
         })
     }

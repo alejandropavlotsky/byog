@@ -13,4 +13,36 @@ article{
 }
 .class-card{
     padding: 0;
+    margin-bottom: 32px;
+}
+.card-event .card-body{
+    background-color: #4fd250d6;
+    overflow: hidden;
+}
+.card-event p{
+    color: white;
+}
+.card-zoom {
+    margin: 0 1em;
+    overflow: hidden;
+    transition: transform .5s ease;
+}
+.card-zoom:hover {
+    transform: scale(1.005);
+}
+.card-zoom--inverted:hover {
+    transform: scale(.98);
+}
+.card-zoomed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .8s ease;
+}
+.card-zoomed--inverted {
+    transition: .5s ease;
+}
+
+.card-zoomed:hover {
+    transform: scale(1.1);
 }

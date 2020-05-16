@@ -4,6 +4,7 @@ import FileService from '../../../service/file.service'
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import './GameForm.css'
 const utils = require('../../../utils/gameDificultyOptions')
 
 
@@ -60,7 +61,7 @@ class GameForm extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="game-form">
 
                 <h1>Nuevo juego</h1>
                 <hr></hr>
@@ -111,7 +112,7 @@ class GameForm extends Component {
                     <Form.Group controlId="difficulty">
                         <Form.Label>Dificultad del juego</Form.Label>
                         <Form.Control as="select" name="difficulty" size="sm" value={this.state.difficulty} custom onChange={this.handleInputChange}>
-                            {utils.map(elm => <option>{elm.label}</option>)}
+                            {utils.map((elm, idx) => <option key={idx}>{elm.label}</option>)}
                         </Form.Control>
                     </Form.Group>
 
@@ -125,8 +126,8 @@ class GameForm extends Component {
                         <Form.Control name="language" type="text" size="sm" value={this.state.language} onChange={this.handleInputChange} />
                     </Form.Group>
 
-                    <Button variant="success" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }}>Cerrar</Button>
-                    <Button variant="success" type="submit">Crear juego</Button>
+                    <Button variant="success" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }} className="btn-one">Cerrar</Button>
+                    <Button variant="success" className="btn-one" type="submit">Crear juego</Button>
                 </Form>
             </Container>
         )

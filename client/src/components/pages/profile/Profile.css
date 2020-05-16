@@ -1,0 +1,19 @@
+.profile-game-details{
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px;
+    text-align: center;
+}
+.profile-game-details img{
+    width:100%;
+    object-fit:cover;
+}
+.profile-game-img{
+    width: 100px;
+}
+.profile-game-details-buttons{
+    margin-top: 16px;
+    display: flex;
+    justify-content: space-around;
+}

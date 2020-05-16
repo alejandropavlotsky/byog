@@ -11,9 +11,9 @@ class ReviewForm extends Component {
         super(props)
         this.state = {
             text: '',
-            typeOfReview: '',
-            author: '',
-            loggedInUser: this.props.loggedInUser,
+            typeOfReview: 'Evento',
+            author: props.loggedInUser._id,
+            reviewedInEvent: props.eventId,
         }
         this.reviewService = new ReviewService()
     }
@@ -24,9 +24,9 @@ class ReviewForm extends Component {
     }
 
     handleSubmit = e => {
-        e.prevenDefault()
+        e.preventDefault()
         this.reviewService.saveReview(this.state)
-            .then(() => this.props.finishEventPost())
+            .then(() => this.props.finishGamePost())
             .catch(err => console.log(err))
     }
 
@@ -38,7 +38,7 @@ class ReviewForm extends Component {
                 <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId="text">
                         <Form.Label>Comentario</Form.Label>
-                        <Form.Control name="text" type="text" size="sm" loggedInUser={this.props.loggedInUser} value={this.state.text} onChange={this.handleInputChange} />
+                        <Form.Control name="text" type="text" size="sm" value={this.state.text} onChange={this.handleInputChange} />
                     </Form.Group>
                     <Button variant="success" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }}>Cerrar</Button>
                     <Button variant="success" type="submit">Postear Comentario</Button>

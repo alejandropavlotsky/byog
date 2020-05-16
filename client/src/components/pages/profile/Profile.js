@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import UserService from '../../../service/user.service'
 import './Profile.css'
-import Card from 'react-bootstrap/Card'
+import moment from 'moment'
+
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -19,7 +20,9 @@ class Profile extends Component {
 
     componentDidMount() {
         this.UserService.getProfileInfo(this.props.loggedInUser._id)
+        
             .then((response) => {
+                console.log(response.data)
                 this.setState({profileData: response.data})
             })
     }
@@ -34,17 +37,22 @@ class Profile extends Component {
                         !this.state.profileData ? null :
                             <>
                                 <h1>Mis juegos</h1>
-                                    <Row>
-                                        <Col md={3}>
-                                            {
+                                    <Row className="justify-content-center">
+                                        
+                                        {
+                                            this.state.profileData.games &&
                                             this.state.profileData.games.map(game =>          
-                                                    <Card key={game._id}>{game.title}
-                                                        <Button className="btn btn-success btn-sm">Editar</Button>
-                                                        <Button className="btn btn-success btn-sm">Borrar</Button>
-                                                    </Card>)
+                                                <Col md={3} key={game._id} className="profile-game-details">
+                                                    <p className="btn-one">{game.title}</p>
+                                                    <img src={game.gameImg} alt="gameImg" className="profile-game-img"/>
+                                                    <div className="profile-game-details-buttons">
+                                                        <Button className="btn btn-success btn-sm edit-btn">Editar</Button>
+                                                        <Button className="btn btn-success btn-sm dlt-btn">Borrar</Button>
+                                                    </div>
+                                                </Col>)
                                             }
                                             
-                                        </Col>
+                                        
                                     </Row>
                             </>
                     }
@@ -52,32 +60,36 @@ class Profile extends Component {
                         !this.state.profileData ? null :
                             <>
                                 <h1>Mis Eventos</h1>
-                                    <Row>
-                                        <Col md={3}>
-                                            {
+                                    <Row className="justify-content-center">
+                                        
+                                        {
+                                            this.state.profileData.events &&
                                             this.state.profileData.events.map(event =>
-                                                <p key={event._id}>{event.title}
+                                                <Col md={3} key={event._id}>
+                                                    <p>{event.title}</p>
+                                                    <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
                                                     <Button className="btn btn-success btn-sm">Editar</Button>
                                                     <Button className="btn btn-success btn-sm">Borrar</Button>
-                                            </p>)
+                                              </Col>)
                                             }
-                                        </Col>
+                                      
                                     </Row>
                             </>
                     }
-                    {
+                    {/* {
                         !this.state.profileData ? null :
                             <>
                                 <h1>Mis reviews</h1>
                                     <Row>
                                         <Col md={3}>
-                                            {
-                                            this.state.profileData.reviews.map(review => <p key={review._id}>{review.text}</p>)
+                                        {
+                                            this.state.profileData.reviews &&
+                                            this.state.profileData.reviews.map(review => <p key={review._id}>{review.text}{}</p>)
                                             }
                                         </Col>
                                     </Row>
                             </>
-                    }
+                    } */}
                 </Container>
             </>
         )
