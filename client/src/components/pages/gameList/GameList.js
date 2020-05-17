@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import Toast from 'react-bootstrap/Toast'
 import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
+import Form from 'react-bootstrap/Form'
 
 
 class GameList extends Component {
@@ -65,7 +66,15 @@ class GameList extends Component {
                     {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }} className="btn-one">Crear nuevo juego</Button>}
 
                 </Col>
-
+                <Col>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Form.Group controlId="text">
+                            <Form.Control placeholder="buscar" name="text" type="text" size="sm" value={this.state.text} onChange={this.handleInputChange} />
+                            <Button variant="success" type="submit">Buscar</Button>
+                        </Form.Group>
+                    </Form>
+                    
+                </Col>
 
                 <Row className="games-list">
                     {this.state.games.map(elm => <GameCard key={elm._id} {...elm} />)}

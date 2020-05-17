@@ -38,6 +38,7 @@
     animation-name: fadeIn;
 }
 
+
 @keyframes fadeIn {
     from {
         transform: translateX(100px);
