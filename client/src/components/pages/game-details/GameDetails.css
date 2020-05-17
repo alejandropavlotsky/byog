@@ -1,5 +1,7 @@
 .game-details img {
-    width: 100%
+    width: 100%;
+    border-radius: 10px;
+    border: 3px solid #424242;
 }
 .game-details{
     margin-bottom: 50px;

@@ -3,6 +3,7 @@
 }
 
 .games-list img {
-    height: 160px;
-    object-fit: contain;
+    height: auto;
+    width: 170px;
+    margin: 0 auto;
 }

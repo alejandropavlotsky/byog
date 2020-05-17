@@ -5,6 +5,7 @@ import './GameList.css'
 
 import GameCard from '../gameCard/GameCard'
 import GameForm from '../game-form/GameForm'
+import SearchBar from './../searchBar/SearchBar'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -25,7 +26,7 @@ class GameList extends Component {
                 show: false,
                 text: ''
             },
-            games: []
+            games: [],
         }
         this.gameService = new GameService()
     }
@@ -39,9 +40,15 @@ class GameList extends Component {
         this.setState({ toast: toastCopy })
     }
 
+    filteredSearch = (str) => {
+        const { gamesCopy } = this.state
+        const filteredresults = gamesCopy.filter((game) => game.title.toLowerCase().includes(str.toLowerCase()))
+        this.setState({games: filteredresults})
+    }
+
     getAllGames = () => {
         this.gameService.getGames()
-            .then(response => this.setState({ games: response.data }))
+            .then(response => this.setState({ games: response.data, gamesCopy: response.data }))
             .catch(err => console.log(err))
     }
 
@@ -67,13 +74,10 @@ class GameList extends Component {
 
                 </Col>
                 <Col>
-                    <Form onSubmit={this.handleSubmit}>
-                        <Form.Group controlId="text">
-                            <Form.Control placeholder="buscar" name="text" type="text" size="sm" value={this.state.text} onChange={this.handleInputChange} />
-                            <Button variant="success" type="submit">Buscar</Button>
-                        </Form.Group>
-                    </Form>
-                    
+                <SearchBar filteredSearch={this.filteredSearch}></SearchBar>
+                    {
+                        (!this.state.games.length) && <p className="">No se encontraron resultados</p>
+                    }
                 </Col>
 
                 <Row className="games-list">

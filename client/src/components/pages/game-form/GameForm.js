@@ -13,17 +13,17 @@ class GameForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
-            description: '',
-            author: '',
-            gameImg: '',
-            theme: '',
-            ageRange: '',
-            numOfPlayers: '',
-            gameTime: '',
-            difficulty: '',
-            price: 'â‚¬',
-            language: 'EspaÃ±ol',
+            title: props.title || '',
+            description: props.description || '',
+            author: props.author || '',
+            gameImg: props.gameImg || '',
+            theme: props.theme || '',
+            ageRange: props.ageRange || '',
+            numOfPlayers: props.numOfPlayers || '',
+            gameTime: props.gameTime || '',
+            difficulty: props.difficulty || utils[0].label,
+            price: props.price || '€',
+            language: props.language || 'Español',
             owner: props.loggedInUser._id
         }
         this.gameService = new GameService()
@@ -41,9 +41,16 @@ class GameForm extends Component {
 
     handleSubmit = e => {
         e.preventDefault()
-        this.gameService.saveGame(this.state)
-            .then(() => this.props.finishGamePost())
-            .catch(err => console.log(err))
+        if (this.props.title) {
+             this.gameService.editGame({...this.state, _id: this.props._id })
+                .then(() => this.props.finishGamePost())
+                .catch(err => console.log(err))
+        } else {
+            this.gameService.saveGame(this.state)
+                .then(() => this.props.finishGamePost())
+                .catch(err => console.log(err))
+            
+        }
     }
 
     handleFileUpload = e => {
@@ -112,7 +119,7 @@ class GameForm extends Component {
                     <Form.Group controlId="difficulty">
                         <Form.Label>Dificultad del juego</Form.Label>
                         <Form.Control as="select" name="difficulty" size="sm" value={this.state.difficulty} custom onChange={this.handleInputChange}>
-                            {utils.map((elm, idx) => <option key={idx}>{elm.label}</option>)}
+                            {utils.map((elm, idx) => <option selected={(this.props.title) ? this.props.difficulty === elm.label : idx === 0} key={idx}>{elm.label}</option>)}
                         </Form.Control>
                     </Form.Group>
 
@@ -125,9 +132,9 @@ class GameForm extends Component {
                         <Form.Label>Idioma</Form.Label>
                         <Form.Control name="language" type="text" size="sm" value={this.state.language} onChange={this.handleInputChange} />
                     </Form.Group>
-
+                    
                     <Button variant="success" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }} className="btn-one">Cerrar</Button>
-                    <Button variant="success" className="btn-one" type="submit">Crear juego</Button>
+                    <Button variant="success" className="btn-one" type="submit">{this.props.title ? "Actualizar juego" : "Crear juego"}</Button>
                 </Form>
             </Container>
         )
