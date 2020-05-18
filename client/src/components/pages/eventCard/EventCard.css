@@ -46,3 +46,8 @@ article{
 .card-zoomed:hover {
     transform: scale(1.1);
 }
+@media (max-width: 768px){
+    .card-zoomed:hover {
+        transform: scale(1.05);
+    }
+}

@@ -38,6 +38,10 @@
     animation-name: fadeIn;
 }
 
+.view-more-button{
+    display:flex;
+    justify-content: center;
+}
 
 @keyframes fadeIn {
     from {

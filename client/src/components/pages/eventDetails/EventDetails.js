@@ -93,17 +93,7 @@ class EventDetails extends Component {
 
 	render() {
 		if (this.state.event) {
-			const {
-				author,
-				title,
-				loggedInUser,
-				description,
-				location,
-				attendance,
-				gameDate,
-				reviews,
-				assistance
-			} = this.state.event
+			const { author, title, description, location, attendance, gameDate, reviews, assistance } = this.state.event
 
 			const isAttending =
 				this.props.loggedInUser &&

@@ -4,6 +4,9 @@
     padding: 8px;
     margin: 8px;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 }
 .profile-game-details img{
     width:100%;

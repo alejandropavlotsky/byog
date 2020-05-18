@@ -13,94 +13,99 @@ import Button from 'react-bootstrap/Button'
 import Toast from 'react-bootstrap/Toast'
 import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
-import Form from 'react-bootstrap/Form'
-
 
 class GameList extends Component {
+	constructor() {
+		super()
+		this.state = {
+			modalShow: false,
+			toast: {
+				show: false,
+				text: ''
+			},
+			games: []
+		}
+		this.gameService = new GameService()
+	}
 
-    constructor() {
-        super()
-        this.state = {
-            modalShow: false,
-            toast: {
-                show: false,
-                text: ''
-            },
-            games: [],
-        }
-        this.gameService = new GameService()
-    }
+	handleModal = visible => this.setState({ modalShow: visible })
+	handletoast = (visible, text = '') => {
+		const toastCopy = { ...this.state.toast }
+		toastCopy.show = visible
+		toastCopy.text = text
+		this.setState({ toast: toastCopy })
+	}
 
-
-    handleModal = visible => this.setState({ modalShow: visible })
-    handletoast = (visible, text = '') => {
-        const toastCopy = { ...this.state.toast }
-        toastCopy.show = visible
-        toastCopy.text = text
-        this.setState({ toast: toastCopy })
-    }
-
-    filteredSearch = (str) => {
+	filteredSearch = str => {
         const { gamesCopy } = this.state
-        const filteredresults = gamesCopy.filter((game) => game.title.toLowerCase().includes(str.toLowerCase()))
-        this.setState({games: filteredresults})
-    }
+		const filteredresults = gamesCopy.filter(game => game.title.toLowerCase().includes(str.toLowerCase()))
+		this.setState({ games: filteredresults })
+	}
 
-    getAllGames = () => {
-        this.gameService.getGames()
-            .then(response => this.setState({ games: response.data, gamesCopy: response.data }))
-            .catch(err => console.log(err))
-    }
+	getAllGames = () => {
+		this.gameService
+			.getGames()
+			.then(response => this.setState({ games: response.data, gamesCopy: response.data }))
+			.catch(err => console.log(err))
+	}
 
+	componentDidMount = () => {
+		this.getAllGames()
+	}
 
-    componentDidMount = () => {
-        this.getAllGames()
-    }
+	finishGamePost = () => {
+		this.getAllGames()
+		this.handleModal(false)
+		this.handletoast(true, 'El juego se ha creado con éxito!')
+	}
 
+	render() {
+		return (
+			<Container as='section'>
+				<h1>Listado de juegos</h1>
+				<Col md={{ span: 4, offset: 4 }}>
+					{this.props.loggedInUser && (
+						<Button
+							onClick={() => this.handleModal(true)}
+							variant='success'
+							block
+							style={{ marginBottom: '20px' }}
+							className='btn-one'>
+							Crear nuevo juego
+						</Button>
+					)}
+				</Col>
+				<div>
+					<SearchBar filteredSearch={this.filteredSearch} />
+					{!this.state.games.length && <p className=''>No se encontraron resultados</p>}
+				</div>
 
-    finishGamePost = () => {
-        this.getAllGames()
-        this.handleModal(false)
-        this.handletoast(true, 'El juego se ha creado con éxito!')
-    }
+				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm} />)}</Row>
 
-    render() {
-        return (
-            <Container as="section">
-            
-                <h1>Listado de juegos</h1>
-                <Col md={{ span: 4, offset: 4 }}>
-                    {this.props.loggedInUser && <Button onClick={() => this.handleModal(true)} variant="success" block style={{ marginBottom: '20px' }} className="btn-one">Crear nuevo juego</Button>}
+				<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
+					<Modal.Body>
+						<GameForm
+							loggedInUser={this.props.loggedInUser}
+							finishGamePost={this.finishGamePost}
+							closeModal={() => this.handleModal(false)}
+						/>
+					</Modal.Body>
+				</Modal>
 
-                </Col>
-                <Col>
-                <SearchBar filteredSearch={this.filteredSearch}></SearchBar>
-                    {
-                        (!this.state.games.length) && <p className="">No se encontraron resultados</p>
-                    }
-                </Col>
-
-                <Row className="games-list">
-                    {this.state.games.map(elm => <GameCard key={elm._id} {...elm} />)}
-                </Row>
-
-
-                <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
-                    <Modal.Body>
-                        <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
-                    </Modal.Body>
-                </Modal>
-
-
-                <Toast variant="success" onClose={() => this.handletoast(false)} show={this.state.toast.show} delay={4000} autohide>
-                    <Toast.Header><strong className="mr-auto">Mensaje</strong></Toast.Header>
-                    <Toast.Body>{this.state.toast.text}</Toast.Body>
-                </Toast>
-
-
-            </Container>
-        )
-    }
+				<Toast
+					variant='success'
+					onClose={() => this.handletoast(false)}
+					show={this.state.toast.show}
+					delay={4000}
+					autohide>
+					<Toast.Header>
+						<strong className='mr-auto'>Mensaje</strong>
+					</Toast.Header>
+					<Toast.Body>{this.state.toast.text}</Toast.Body>
+				</Toast>
+			</Container>
+		)
+	}
 }
 
 export default GameList

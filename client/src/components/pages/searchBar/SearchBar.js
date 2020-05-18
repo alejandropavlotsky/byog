@@ -10,7 +10,7 @@ class SearchBar extends Component {
 		}
 	}
 	handleChange = e => {
-		const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+		const value = e.target.value
 		this.setState({
 			[e.target.name]: value
 		})

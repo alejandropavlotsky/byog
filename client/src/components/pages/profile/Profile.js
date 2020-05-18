@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import UserService from '../../../service/user.service'
 import GameService from '../../../service/game.service'
+import EventService from '../../../service/events.service'
 import './Profile.css'
 import moment from 'moment'
 
 import GameForm from './../game-form/GameForm'
+import EventForm from './../eventForm/EventForm'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -25,10 +27,12 @@ class Profile extends Component {
         }
         this.UserService = new UserService()
         this.GameService = new GameService()
+        this.EventService = new EventService()
     }
 
     handleModal = (visible, modalGame) => this.setState({ modalShow: visible, modalGame })
-
+    // handleEventModal = (visible, modalEvent) => this.setState({ modalShow: visible, modalEvent })
+    
     handletoast = (visible, text = '') => {
         const toastCopy = { ...this.state.toast }
         toastCopy.show = visible
@@ -39,19 +43,23 @@ class Profile extends Component {
     finishGamePost = () => {
         this.handleModal(false, {})
     }
+    
+    deleteEvent(eventId) {
+        this.EventService.deleteEvent(eventId)
+            .then(() => this.getProfileInfo())
+            .catch(err => console.log(err))
+    }
 
     deleteGame(gameId) {
         this.GameService.deleteGame(gameId)
             .then(() => this.getProfileInfo())
-            .catch(console.error)
+            .catch(err => console.log(err))
+
     }
 
     getProfileInfo() {
         this.UserService.getProfileInfo(this.props.loggedInUser._id)
-            .then((response) => {
-                console.log(response.data)
-                this.setState({profileData: response.data})
-            })
+            .then((response) => this.setState({profileData: response.data}))
     }
 
     componentDidMount() {
@@ -101,14 +109,19 @@ class Profile extends Component {
                                                 <Col md={3} key={event._id}>
                                                     <p>{event.title}</p>
                                                     <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
-                                                    <Button className="btn btn-success btn-sm">Editar</Button>
-                                                    <Button className="btn btn-success btn-sm">Borrar</Button>
+                                                    <Button onClick={() => this.handleModal(true, event)} className="btn btn-success btn-sm">Editar</Button>
+                                                    <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>
                                               </Col>)
                                             }
                                       
                                     </Row>
                             </>
                     }
+                    <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
+                        <Modal.Body>
+                            <EventForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleEventModal(false)} {...this.state.modalEvent}/>
+                        </Modal.Body>
+                    </Modal>
                 </Container>
             </>
         )

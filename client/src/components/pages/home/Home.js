@@ -55,7 +55,7 @@ class Home extends Component {
                         {
                             this.state.games.map((elm, idx) => <GameCard key={idx} {...elm}/>).splice(0,4)
                         }
-                        <Col>
+                        <Col as="div" className="view-more-button">
                             <Link to={`/games`} className="btn btn-success btn-sm btn-one">Ver m&#225;s juegos</Link>
                         </Col>
                     </Row>
@@ -65,7 +65,7 @@ class Home extends Component {
                          {
                             this.state.events.map((elm, idx) => <EventCard key={idx} {...elm}/>).splice(0,4)
                         }
-                        <Col>
+                        <Col as="div" className="view-more-button">
                             <Link to={`/events`} className="btn btn-success btn-sm btn-one">Ver m&#225;s eventos</Link>
                         </Col>
                     </Row>
