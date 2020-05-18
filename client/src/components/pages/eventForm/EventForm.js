@@ -43,7 +43,7 @@ class EventForm extends Component {
 	render() {
 		return (
 			<Container>
-				<h1>Nuevo Evento</h1>
+				{!this.props.title ? <h1>Nuevo Evento</h1> : <h1>Actualizar Evento</h1>}
 				<hr />
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group controlId='title'>

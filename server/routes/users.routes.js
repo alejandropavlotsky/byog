@@ -7,6 +7,11 @@ const Events = require("../models/events.model")
 const Review = require("../models/review.model")
 
 
+router.get('/', (req, res, next) => {
+    User.find()
+        .then(data => res.json(data))
+        .catch(err => next(new Error(err)))
+})
 
 router.get('/:userId', (req, res, next) => {
     User.findById(req.params.id)

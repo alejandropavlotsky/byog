@@ -66,7 +66,7 @@ class GameForm extends Component {
 	render() {
 		return (
 			<Container className='game-form'>
-				<h1>Nuevo juego</h1>
+				{this.props.title ? <h1>Actualizar juego</h1> : <h1>Nuevo juego</h1>}
 				<hr />
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group controlId='title'>

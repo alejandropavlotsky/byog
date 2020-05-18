@@ -26,6 +26,7 @@ class EventDetails extends Component {
 				lat: props.lat,
 				lng: props.lng
 			},
+			attendance: 0,
 			loggedInUser: this.props.loggedInUser,
 			modalShow: false,
 			toast: {
@@ -53,9 +54,15 @@ class EventDetails extends Component {
 	}
 
 	handleEventSign = e => {
-		const assistanceCopy = [ ...this.state.event.assistance ]
-		assistanceCopy.push(this.props.loggedInUser._id)
-		this.eventService.editEvent({ ...this.state.event, assistance: assistanceCopy }).then(console.log)
+		if (this.state.event.attendance > 0 && !this.state.event.assistance.includes(this.props.loggedInUser.username)) {
+			let eventCopy = this.state.event
+			eventCopy.assistance.push(this.props.loggedInUser._id)
+			eventCopy.attendance -= 1
+			this.eventService
+				.editEvent(eventCopy)
+				.then(response => this.setState({ event: response.data }))
+				.catch(err => console.log(err))
+		}
 	}
 
 	getEventInfo() {
@@ -100,7 +107,6 @@ class EventDetails extends Component {
 				assistance &&
 				assistance.length > 0 &&
 				assistance.findIndex(user => user._id === this.props.loggedInUser._id) > -1
-
 			return (
 				<Container as='section' className='event-details'>
 					<h1>{title}</h1>
@@ -141,38 +147,38 @@ class EventDetails extends Component {
 							<h4>Detalles</h4>
 							<hr />
 							<p>
-								{' '}
-								<strong>Autor: </strong> {author.username}{' '}
+								
+								<strong>Autor: </strong> {author.username}
 							</p>
 							<hr />
 							<p>
-								{' '}
-								<strong>Descripci&#243;n: </strong> {description}{' '}
+								
+								<strong>Descripci&#243;n: </strong> {description}
 							</p>
 							<hr />
 							<p>
-								{' '}
-								<strong>Direcci&#243;n: </strong> {location}{' '}
+
+								<strong>Direcci&#243;n: </strong> {location}
 							</p>
 							<hr />
 							<p>
-								{' '}
-								<strong>Participantes: </strong> {attendance}{' '}
+								
+								<strong>Plazas restantes: </strong> {attendance}
 							</p>
 							<hr />
 							<p>
-								{' '}
-								<strong>Asistentes: </strong>{' '}
+								
+								<strong>Asistentes: </strong>
 								{!this.state.event && !this.state.event.assistance ? (
-									'No hay nadie apuntado, todavía'
+									<p>No hay nadie apuntado, todavía</p>
 								) : (
-									this.state.event.assistance.map(user => user.username).join(', ')
-								)}{' '}
+									this.state.event.assistance.map(user => <strong> {user.username}</strong>).join(', ')
+								)}
 							</p>
 							<hr />
 							<p>
-								{' '}
-								<strong>Fecha: </strong> {moment(gameDate).format('DD/MM/YYYY h:mmA')}{' '}
+								
+								<strong>Fecha: </strong> {moment(gameDate).format('DD/MM/YYYY h:mmA')}
 							</p>
 							<hr />
 							{this.props.loggedInUser && (
@@ -186,8 +192,8 @@ class EventDetails extends Component {
 								</Button>
 							)}
 							<p>
-								{' '}
-								<strong>Rese&#241;as: </strong> {reviews}{' '}
+								
+								<strong>Rese&#241;as: </strong> {reviews}
 							</p>
 						</Col>
 					</Row>

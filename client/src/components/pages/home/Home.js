@@ -43,7 +43,7 @@ class Home extends Component {
                 <section className="main-section">
                     <div className="fadeIn">
                         <h1>Bienvenido a BYOG </h1>
-                        <h2>(bring your own game)</h2>
+                        <h2>(Bring Your Own Game)</h2>
                         <p>En esta página puedes subir tus propios juegos, ver los juegos que tienen los demás, asistir a eventos creados por los mismos usuarios, dejar opiniones sobre sus juegos, y sobre los eventos a los que has asistido.</p>
 
                     </div>
@@ -69,6 +69,7 @@ class Home extends Component {
                             <Link to={`/events`} className="btn btn-success btn-sm btn-one">Ver m&#225;s eventos</Link>
                         </Col>
                     </Row>
+                    
 
                 </Container>
             </>

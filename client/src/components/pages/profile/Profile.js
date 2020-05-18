@@ -6,7 +6,7 @@ import './Profile.css'
 import moment from 'moment'
 
 import GameForm from './../game-form/GameForm'
-import EventForm from './../eventForm/EventForm'
+// import EventForm from './../eventForm/EventForm'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -31,7 +31,7 @@ class Profile extends Component {
     }
 
     handleModal = (visible, modalGame) => this.setState({ modalShow: visible, modalGame })
-    // handleEventModal = (visible, modalEvent) => this.setState({ modalShow: visible, modalEvent })
+
     
     handletoast = (visible, text = '') => {
         const toastCopy = { ...this.state.toast }
@@ -92,11 +92,13 @@ class Profile extends Component {
                                     </Row>
                             </>
                     }
+                    
                     <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                         <Modal.Body>
                             <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} {...this.state.modalGame}/>
                         </Modal.Body>
                     </Modal>
+                            
                     {
                         !this.state.profileData ? null :
                             <>
@@ -106,7 +108,7 @@ class Profile extends Component {
                                         {
                                             this.state.profileData.events &&
                                             this.state.profileData.events.map(event =>
-                                                <Col md={3} key={event._id}>
+                                                <Col md={3} key={event._id} className="profile-event-details">
                                                     <p>{event.title}</p>
                                                     <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
                                                     <Button onClick={() => this.handleModal(true, event)} className="btn btn-success btn-sm">Editar</Button>
@@ -117,11 +119,33 @@ class Profile extends Component {
                                     </Row>
                             </>
                     }
-                    <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
+                    {/* {
+                        !this.state.profileData ? null :
+                            <>
+                                <h1>Mis Juegos Favoritos</h1>
+                                    <Row className="justify-content-center">
+                                        
+                                        {
+                                            this.state.profileData.user.favorites &&
+                                            this.state.profileData.events.map(event =>
+                                                <Col md={3} key={event._id} className="profile-event-details">
+                                                    <p>{game.title}</p>
+                                                    <Button onClick={() => this.handleModal(true, event)} className="btn btn-success btn-sm">Editar</Button>
+                                                    <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>
+                                              </Col>)
+                                            }
+                                      
+                                    </Row>
+                            </>
+                    } */}
+                    
+
+                             {/* <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                         <Modal.Body>
                             <EventForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleEventModal(false)} {...this.state.modalEvent}/>
                         </Modal.Body>
                     </Modal>
+                     */}
                 </Container>
             </>
         )

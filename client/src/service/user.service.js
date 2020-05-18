@@ -8,6 +8,7 @@ export default class services {
         })
     }
 
+    getUsers = () => this.service.get('/')
     getUserById = userId => this.service.get(`/${userId}`)
     getProfileInfo = userId => this.service.get(`/${userId}/profile-info`)
 

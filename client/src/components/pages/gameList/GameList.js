@@ -37,7 +37,7 @@ class GameList extends Component {
 	}
 
 	filteredSearch = str => {
-        const { gamesCopy } = this.state
+		const { gamesCopy } = this.state
 		const filteredresults = gamesCopy.filter(game => game.title.toLowerCase().includes(str.toLowerCase()))
 		this.setState({ games: filteredresults })
 	}
