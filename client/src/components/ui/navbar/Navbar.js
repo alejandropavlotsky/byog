@@ -29,6 +29,7 @@ class Navigation extends Component {
                     <Nav>
                             <Nav.Link as="div"><Link to="/games" className="btnnav btn-one">Juegos</Link></Nav.Link>
                             <Nav.Link as="div"><Link to="/events" className="btnnav btn-one">Eventos</Link></Nav.Link>
+                            <Nav.Link as="div"><Link to="/users" className="btnnav btn-one">Usuarios</Link></Nav.Link>
                             <Navbar.Brand as="div"><Link to="/"><img src="./../../../../img/logo.png" alt="logo"/></Link></Navbar.Brand>    
                             {
                                 !this.props.loggedInUser ?

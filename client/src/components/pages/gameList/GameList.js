@@ -77,7 +77,7 @@ class GameList extends Component {
 				</Col>
 				<div>
 					<SearchBar filteredSearch={this.filteredSearch} />
-					{!this.state.games.length && <p className=''>No se encontraron resultados</p>}
+					{!this.state.games.length && <p>No se encontraron resultados</p>}
 				</div>
 
 				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm} />)}</Row>

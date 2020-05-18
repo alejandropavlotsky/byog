@@ -6,7 +6,7 @@ import './Profile.css'
 import moment from 'moment'
 
 import GameForm from './../game-form/GameForm'
-// import EventForm from './../eventForm/EventForm'
+import EventForm from './../eventForm/EventForm'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
 import Row from 'react-bootstrap/Row'
@@ -89,15 +89,15 @@ class Profile extends Component {
                                                     </div>
                                                 </Col>)
                                             }
-                                    </Row>
-                            </>
-                    }
-                    
                     <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                         <Modal.Body>
                             <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} {...this.state.modalGame}/>
                         </Modal.Body>
                     </Modal>
+                                    </Row>
+                            </>
+                    }
+                    
                             
                     {
                         !this.state.profileData ? null :
@@ -115,7 +115,6 @@ class Profile extends Component {
                                                     <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>
                                               </Col>)
                                             }
-                                      
                                     </Row>
                             </>
                     }
@@ -140,12 +139,7 @@ class Profile extends Component {
                     } */}
                     
 
-                             {/* <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
-                        <Modal.Body>
-                            <EventForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleEventModal(false)} {...this.state.modalEvent}/>
-                        </Modal.Body>
-                    </Modal>
-                     */}
+                      
                 </Container>
             </>
         )

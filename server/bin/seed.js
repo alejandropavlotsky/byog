@@ -428,8 +428,3 @@ User.create(users)
         })
     })
     .catch(err => mongoose.connection.close())
-
-
-
-
-    

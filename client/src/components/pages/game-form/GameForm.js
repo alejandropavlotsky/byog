@@ -232,7 +232,7 @@ class GameForm extends Component {
 							onChange={this.handleInputChange}>
 							{utils.map((elm, idx) => (
 								<option
-									selected={this.props.title ? this.props.difficulty === elm.label : idx === 0}
+									defaultValue={this.props.title ? this.props.difficulty === elm.label : idx === 0}
 									key={idx}>
 									{elm.label}
 								</option>

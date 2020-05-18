@@ -4,6 +4,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
 import Home from './pages/home/Home'
+import UserList from './pages/usersList/UsersList'
 import GameService from './../service/game.service'
 import EventService from './../service/events.service'
 import Navigation from './ui/navbar/Navbar'
@@ -45,6 +46,8 @@ class App extends Component {
             <Route path="/games/:gameId/details" exact render={props => <GameDetails {...props} />} />
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/users" exact render={() => <UserList loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/users/:userId" exact render={() => <Profile loggedInUser={this.state.loggedInUser} />} />
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />

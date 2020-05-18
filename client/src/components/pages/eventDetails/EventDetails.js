@@ -97,16 +97,15 @@ class EventDetails extends Component {
 		this.handleModal(false)
 		this.handleToast(true, 'El comentario se ha creado con Ã©xito!')
 	}
-
 	render() {
 		if (this.state.event) {
 			const { author, title, description, location, attendance, gameDate, reviews, assistance } = this.state.event
-
+			
 			const isAttending =
-				this.props.loggedInUser &&
-				assistance &&
-				assistance.length > 0 &&
-				assistance.findIndex(user => user._id === this.props.loggedInUser._id) > -1
+			this.props.loggedInUser &&
+			assistance &&
+			assistance.length > 0 &&
+			assistance.findIndex(user => user._id === this.props.loggedInUser._id) > -1
 			return (
 				<Container as='section' className='event-details'>
 					<h1>{title}</h1>
@@ -162,22 +161,19 @@ class EventDetails extends Component {
 							</p>
 							<hr />
 							<p>
-								
 								<strong>Plazas restantes: </strong> {attendance}
 							</p>
 							<hr />
 							<p>
-								
 								<strong>Asistentes: </strong>
 								{!this.state.event && !this.state.event.assistance ? (
 									<p>No hay nadie apuntado, todavía</p>
 								) : (
-									this.state.event.assistance.map(user => <strong> {user.username}</strong>).join(', ')
+									this.state.event.assistance.map(user => user.username ).join(', ')
 								)}
 							</p>
 							<hr />
 							<p>
-								
 								<strong>Fecha: </strong> {moment(gameDate).format('DD/MM/YYYY h:mmA')}
 							</p>
 							<hr />
@@ -192,7 +188,6 @@ class EventDetails extends Component {
 								</Button>
 							)}
 							<p>
-								
 								<strong>Rese&#241;as: </strong> {reviews}
 							</p>
 						</Col>

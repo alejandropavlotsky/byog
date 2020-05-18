@@ -23,7 +23,9 @@ class EventsList extends Component {
 				show: false,
 				text: ''
 			},
-			events: []
+			events: [],
+			filteredEvents: []
+
 		}
 		this.eventService = new EventService()
 	}
@@ -37,13 +39,12 @@ class EventsList extends Component {
     }
     
     filteredSearch = str => {
-        const eventCopy =  [...this.state.events]
-		const filteredresults = eventCopy.filter(event => event.title.toLowerCase().includes(str.toLowerCase()))
-        this.setState({ events: filteredresults })
+		const filteredresults =  this.state.events.filter(event => event.title.toLowerCase().includes(str.toLowerCase()))
+        this.setState({ filteredEvents: filteredresults })
 	}
 
 	getAllEvents = () => {
-		this.eventService.getEvents().then(response => this.setState({ events: response.data }))
+		this.eventService.getEvents().then(response => this.setState({ events: response.data, filteredEvents: response.data }))
 	}
 
 	componentDidMount = () => {
@@ -74,10 +75,10 @@ class EventsList extends Component {
                 </Col>
                 <div>
 					<SearchBar filteredSearch={this.filteredSearch} />
-					{!this.state.events.length && <p className=''>No se encontraron resultados</p>}
+					{!this.state.events.length && <p>No se encontraron resultados</p>}
 				</div>
 
-				<Row className='events-list'>{this.state.events.map(elm => <EventCard key={elm._id} {...elm} />)}</Row>
+				<Row className='events-list'>{this.state.filteredEvents.map(elm => <EventCard key={elm._id} {...elm} />)}</Row>
 
 				<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
 					<Modal.Body>
