@@ -53,10 +53,10 @@ class Signup extends Component {
     render() {
 
         return (
-            <Container>
+            <Container as="section" className="signup-container">
 
                 <Row>
-                    <Col md={{ span: 4, offset: 4 }}>
+                    <Col md={{ span: 6, offset: 3 }}>
 
                         <h3>Registro de usuario</h3>
                         <hr></hr>

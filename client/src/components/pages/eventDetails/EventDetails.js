@@ -75,8 +75,6 @@ class EventDetails extends Component {
 
 	updateReviews(newReview) {
 		const reviewsCopy = [...this.state.reviews, newReview] 
-		console.log(reviewsCopy)
-
 		this.setState({...this.state, reviews: reviewsCopy})
 	}
 

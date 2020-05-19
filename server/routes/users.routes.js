@@ -14,8 +14,9 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:userId', (req, res, next) => {
+    console.log(req.params.userId, "HOLA")
     User.findById(req.params.userId)
-        .then(data => res.json(data))
+        .then((data) =>res.json(data))
         .catch(err => next(new Error(err)))
 
 })

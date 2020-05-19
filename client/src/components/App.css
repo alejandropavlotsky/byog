@@ -118,3 +118,7 @@ a, a:hover {
   padding: 10px
 }
 /* erros msg */
+.login-container{
+  height: 50vh;
+  margin-top:50px;
+}

@@ -1,3 +1,7 @@
 .form-label, p small{
     color: #aaa;
 }
+.signup-container{
+    height: 50vh;
+    margin-top: 50px;
+}

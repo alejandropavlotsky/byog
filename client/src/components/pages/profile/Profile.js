@@ -67,7 +67,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        this.props.loggedInUser ? this.getProfileInfo(this.props.loggedInUser._id) : this.getProfileInfo(this.props.profileData.user._id)
+        this.props.loggedInUser ? this.getProfileInfo(this.props.loggedInUser._id) : this.getProfileInfo(this.props.match.params.userId)
     }
 
 
@@ -95,8 +95,13 @@ class Profile extends Component {
                                             </Col>)
                                         }
                                     <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
-                                                        <Modal.Body>
-                                                            {this.state.modalContent === 'game' ? <GameForm/> : <EventForm/>}
+                                        <Modal.Body>
+                                            {
+                                                this.state.modalContent === 'game' ?
+                                                <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
+                                                :
+                                                <EventForm loggedInUser={this.props.loggedInUser} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)} />
+                                            }
                                         </Modal.Body>
                                     </Modal>
                                 </Row>
@@ -116,8 +121,8 @@ class Profile extends Component {
                                                 <Col md={3} key={event._id} className="profile-event-details">
                                                     <p>{event.title}</p>
                                                     <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
-                                                    <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm">Editar</Button>
-                                                    <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>
+                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm">Editar</Button>}
+                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>}
                                               </Col>)
                                             }
                                     </Row>

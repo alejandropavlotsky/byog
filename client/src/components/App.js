@@ -51,13 +51,13 @@ class App extends Component {
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
             <Route path="/users" exact render={() => <UserList loggedInUser={this.state.loggedInUser} />} />
-            <Route path="/users/:userId._id/profile-ifo" exact render={() => <UsersDetails loggedInUser={this.state.loggedInUser} />} />
+            {/* <Route path="/users/:userId._id/profile-ifo" exact render={() => <UsersDetails loggedInUser={this.state.loggedInUser} />} /> */}
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
             <Route path="/profile" exact render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-            <Route path="/users/:otherUserId" render={() => this.state.loggedInUser ? <Profile /> : <Redirect to="/" />} />
+            <Route path="/users/:userId" render={props => this.state.loggedInUser ? <Profile {...props} /> : <Redirect to="/login" />} />
           </Switch>
 
         </main>
