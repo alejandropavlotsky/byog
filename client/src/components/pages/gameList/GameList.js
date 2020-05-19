@@ -89,7 +89,7 @@ class GameList extends Component {
 					{!this.state.games.length && <p>No se encontraron resultados</p>}
 				</div>
 
-				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm} />)}</Row>
+				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm}/>)}</Row>
 
 				<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
 					<Modal.Body>

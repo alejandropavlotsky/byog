@@ -47,6 +47,9 @@ class Profile extends Component {
     finishGamePost = () => {
         this.handleModal(false, {})
     }
+    finishEventPost = () => {
+        this.handleModal(false, {})
+    }
     
     deleteEvent(eventId) {
         this.EventService.deleteEvent(eventId)
@@ -89,8 +92,8 @@ class Profile extends Component {
                                                 <p className="btn-one">{game.title}</p>
                                                 <img src={game.gameImg} alt="gameImg" className="profile-game-img"/>
                                                 <div className="profile-game-details-buttons">
-                                                    <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn">Editar</Button>
-                                                    <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn">Borrar</Button>
+                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn">Editar</Button>}
+                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn">Borrar</Button>} 
                                                 </div>
                                             </Col>)
                                         }

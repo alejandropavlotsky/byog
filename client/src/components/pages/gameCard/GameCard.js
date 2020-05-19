@@ -9,13 +9,12 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 class GameCard extends Component {
-    constructor(props) {
-        
+	constructor(props) {
 		super(props)
-        this.state = {
-            loggedInUser: null
-        }
+		this.state = {}
+	
 	}
+
 	render() {
 		return (
 			<Col lg={3} md={6}>
@@ -28,7 +27,7 @@ class GameCard extends Component {
 							className='btn btn-success btn-block btn-sm btn-one'>
 							Ver detalles
 						</Link>
-						{this.state.loggedInUser && (
+						{!this.props.loggedInUser && (
 							<Button onClick={this.addFavorite} variant="success" block style={{ marginBottom: '20px' }}
 							className='btn-one'>Agregar a Favoritos</Button>
 						)}
