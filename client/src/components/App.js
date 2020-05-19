@@ -47,7 +47,7 @@ class App extends Component {
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
             <Route path="/users" exact render={() => <UserList loggedInUser={this.state.loggedInUser} />} />
-            <Route path="/users/:userId" exact render={() => <Profile loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/users/props._id" exact render={() => <Profile loggedInUser={this.state.loggedInUser} />} />
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />

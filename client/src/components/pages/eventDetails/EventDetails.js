@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import EventService from '../../../service/events.service'
+import ReviewService from '../../../service/review.service'
 import moment from 'moment'
 import axios from 'axios'
 
@@ -32,8 +33,10 @@ class EventDetails extends Component {
 			toast: {
 				show: false,
 				text: ''
-			}
+			},
+			reviews: []
 		}
+		this.reviewService = new ReviewService()
 		this.eventService = new EventService()
 	}
 
@@ -54,7 +57,10 @@ class EventDetails extends Component {
 	}
 
 	handleEventSign = e => {
-		if (this.state.event.attendance > 0 && !this.state.event.assistance.includes(this.props.loggedInUser.username)) {
+		if (
+			this.state.event.attendance > 0 &&
+			!this.state.event.assistance.includes(this.props.loggedInUser.username)
+		) {
 			let eventCopy = this.state.event
 			eventCopy.assistance.push(this.props.loggedInUser._id)
 			eventCopy.attendance -= 1
@@ -65,11 +71,27 @@ class EventDetails extends Component {
 		}
 	}
 
+	updateReviews(newReview) {
+		const reviewsCopy = [...this.state.reviews, newReview] 
+		console.log(reviewsCopy)
+		console.log(reviewsCopy, "Reviews Copy")
+
+		this.setState({...this.state, reviews: reviewsCopy})
+	}
+
+	getEventsReviews() {
+		this.reviewService.getEventReviews(this.props.match.params.eventId)
+			.then(response => this.setState({ reviews: response.data}))
+			.catch(err => console.log(err))
+	}
+
 	getEventInfo() {
 		const id = this.props.match.params.eventId
 		this.eventService
 			.getEvent(id)
-			.then(response => this.setState({ event: response.data }, () => this.getGoogleMap()))
+			.then(response =>
+				this.setState({ event: response.data, reviews: response.data.reviews }, () => this.getGoogleMap())
+			)
 			.catch(err => console.log(err))
 	}
 
@@ -90,6 +112,7 @@ class EventDetails extends Component {
 
 	componentDidMount = () => {
 		this.getEventInfo()
+		this.getEventsReviews()
 	}
 
 	finishEventPost = () => {
@@ -100,18 +123,18 @@ class EventDetails extends Component {
 	render() {
 		if (this.state.event) {
 			const { author, title, description, location, attendance, gameDate, reviews, assistance } = this.state.event
-			
+
 			const isAttending =
-			this.props.loggedInUser &&
-			assistance &&
-			assistance.length > 0 &&
-			assistance.findIndex(user => user._id === this.props.loggedInUser._id) > -1
+				this.props.loggedInUser &&
+				assistance &&
+				assistance.length > 0 &&
+				assistance.findIndex(user => user._id === this.props.loggedInUser._id) > -1
 			return (
 				<Container as='section' className='event-details'>
 					<h1>{title}</h1>
 
 					<Row as='article'>
-						<Col md={{ span: 5, offset: 1 }} className='map-button-event-details'>
+						<Col md={{ span: 6 }} className='map-button-event-details'>
 							<div id='map'>
 								<GoogleMapReact
 									bootstrapURLKeys={{ key: 'AIzaSyA5zll-K3WnkRdKTRaRgbyeC_JkL76ygyM' }}
@@ -146,17 +169,14 @@ class EventDetails extends Component {
 							<h4>Detalles</h4>
 							<hr />
 							<p>
-								
 								<strong>Autor: </strong> {author.username}
 							</p>
 							<hr />
 							<p>
-								
 								<strong>Descripci&#243;n: </strong> {description}
 							</p>
 							<hr />
 							<p>
-
 								<strong>Direcci&#243;n: </strong> {location}
 							</p>
 							<hr />
@@ -169,7 +189,7 @@ class EventDetails extends Component {
 								{!this.state.event && !this.state.event.assistance ? (
 									<p>No hay nadie apuntado, todavía</p>
 								) : (
-									this.state.event.assistance.map(user => user.username ).join(', ')
+									this.state.event.assistance.map(user => user.username).join(', ')
 								)}
 							</p>
 							<hr />
@@ -187,9 +207,10 @@ class EventDetails extends Component {
 									Dejar Rese&ntilde;a
 								</Button>
 							)}
-							<p>
-								<strong>Rese&#241;as: </strong> {reviews}
-							</p>
+						
+							<h4>Rese&#241;as: </h4>
+							{this.state.reviews && this.state.reviews.map(review => <div className="review-box"><p> <strong>Autor:</strong>  {review.author.username}</p>  <p>{review.text}</p> </div>)}
+							
 						</Col>
 					</Row>
 					<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
@@ -197,7 +218,7 @@ class EventDetails extends Component {
 							<ReviewForm
 								loggedInUser={this.props.loggedInUser}
 								eventId={this.state.event._id}
-								finishEventPost={this.finishEventPost}
+								updateReviews={this.updateReviews}
 								closeModal={() => this.handleModal(false)}
 							/>
 						</Modal.Body>

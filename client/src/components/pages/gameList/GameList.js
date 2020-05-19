@@ -15,17 +15,25 @@ import Modal from 'react-bootstrap/Modal'
 import Col from 'react-bootstrap/Col'
 
 class GameList extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			modalShow: false,
 			toast: {
 				show: false,
 				text: ''
 			},
-			games: []
+			games: [],
+			favorites: []
 		}
 		this.gameService = new GameService()
+	}
+
+	addFavorite = favorite => {
+		const { favorites } = this.state
+		if (!favorites.some(alreadyFav => alreadyFav._id === favorite._id) ){
+			this.setState({ favorites: this.state.favorites, favorite })
+		}
 	}
 
 	handleModal = visible => this.setState({ modalShow: visible })

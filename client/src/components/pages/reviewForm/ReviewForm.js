@@ -11,7 +11,6 @@ class ReviewForm extends Component {
         super(props)
         this.state = {
             text: '',
-            typeOfReview: 'Evento',
             author: props.loggedInUser._id,
             reviewedInEvent: props.eventId,
         }
@@ -26,11 +25,14 @@ class ReviewForm extends Component {
     handleSubmit = e => {
         e.preventDefault()
         this.reviewService.saveReview(this.state)
-            .then(() => this.props.finishGamePost())
+            .then(response => this.setState(response.data, () => {
+                this.props.updateReviews(this.state)
+            } ))
             .catch(err => console.log(err))
     }
 
-    render(){
+    render() {
+
         return (
             <Container>
                 <h1>Nuevo comentario</h1>

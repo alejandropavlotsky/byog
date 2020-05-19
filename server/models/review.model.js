@@ -3,10 +3,6 @@ const Schema = mongoose.Schema
 
 const reviewSchema = new Schema({
     text: String,
-    typeOfReview: {
-        type: String,
-        enum: ["Evento", "Juego"]
-    },
     author: { type: Schema.Types.ObjectId, ref: "User" },
     reviewedInEvent: {type: Schema.Types.ObjectId, ref: "Evento" },
     reviewedInGame: {type: Schema.Types.ObjectId, ref: "Juegos" }

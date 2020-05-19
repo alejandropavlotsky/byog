@@ -14,16 +14,17 @@ router.get('/', (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
+router.get('/eventreviews/:eventId', (req, res, next) => {
+    Review.find({ reviewedInEvent: req.params.eventId })
+        .populate('author')
+        .then(data => res.json(data))
+        .catch(err => next(new Error(err)))
+})
 
 
 router.post('/new-post', (req, res, next) => {
     Review.create(req.body)
-        .then(data => {
-            if (req.body.typeOfReview === "Evento") {
-                Events.findByIdAndUpdate(req.body.reviewedInEvent, {  })
-            }
-            res.json(data)
-        })
+        .then(data => res.json(data))
         .catch(err => next(new Error(err)))
 })
 

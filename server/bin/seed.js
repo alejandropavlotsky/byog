@@ -315,37 +315,29 @@ const games = [
 const eventReview = [
     {
         text: "Que dia mas chuli",
-        typeOfReview: "Evento"
     },
     {
         text: "Hay que repetir",
-        typeOfReview: "Evento"
     },
     {
         text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina",
-        typeOfReview: "Evento"
     },
     {
         text: "Coincido con Erica",
-        typeOfReview: "Evento"
     }
 ]
 const gameReviews = [
     {
         text: "Alguna vez le he visto hacer trampa, tened cuidado",
-        typeOfReview: "Juego"
     },
     {
         text: "Tiene mal perder, pero llega puntual a los eventos",
-        typeOfReview: "Juego"
     },
     {
         text: "Es un buen jugador, no hace trampas y llega puntual a los eventos",
-        typeOfReview: "Evento"
     },
     {
         text: "Tiene mal perder, pero llega puntual a los eventos",
-        typeOfReview: "Evento"
     }
 ]
 

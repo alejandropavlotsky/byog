@@ -4,7 +4,7 @@ import GameService from '../../../service/game.service'
 import EventService from '../../../service/events.service'
 import './Profile.css'
 import moment from 'moment'
-
+import GameList from './../gameList/GameList'
 import GameForm from './../game-form/GameForm'
 import EventForm from './../eventForm/EventForm'
 import Container from 'react-bootstrap/Container'
@@ -68,6 +68,7 @@ class Profile extends Component {
 
 
     render() {
+        const { favorites } = this.props;
         return (
             <>
                 <Container>
@@ -123,17 +124,13 @@ class Profile extends Component {
                             <>
                                 <h1>Mis Juegos Favoritos</h1>
                                     <Row className="justify-content-center">
-                                        
                                         {
-                                            this.state.profileData.user.favorites &&
-                                            this.state.profileData.events.map(event =>
-                                                <Col md={3} key={event._id} className="profile-event-details">
-                                                    <p>{game.title}</p>
-                                                    <Button onClick={() => this.handleModal(true, event)} className="btn btn-success btn-sm">Editar</Button>
-                                                    <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>
+                                            favorites.map(fav =>
+                                                <Col md={3} key={fav._id} className="profile-event-details">
+                                                    <p>{fav.title}</p>
+                                                    <Button onClick={() => this.deleteEvent(fav._id)} className="btn btn-success btn-sm">Borrar</Button>
                                               </Col>)
-                                            }
-                                      
+                                        }
                                     </Row>
                             </>
                     } */}

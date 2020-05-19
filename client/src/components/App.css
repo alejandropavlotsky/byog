@@ -6,12 +6,13 @@ body {
   min-width: 320px;
 }
 
-h1, h2, h3, h4, strong{
+h1, h2, h3, h4{
   font-weight: 400;
   color: #aaa;
 }
 p{
   color: #eee;
+  font-weight: 100;
 }
 
 h1 {
