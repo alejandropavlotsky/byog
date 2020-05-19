@@ -1,13 +1,14 @@
 const express = require("express")
 const router = express.Router()
 const passport = require("passport")
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login');
 
 const User = require("../models/user.model")
 const bcrypt = require("bcrypt")
 
 
 
-router.post('/signup', (req, res, next) => {
+router.post('/signup', ensureLoggedOut(), (req, res, next) => {
 
     const username = req.body.username;
     const password = req.body.password;
@@ -101,7 +102,7 @@ router.post('/login', (req, res, next) => {
 
 
 
-router.post('/logout', (req, res, next) => {
+router.post('/logout', ensureLoggedIn('/login'), (req, res, next) => {
     // req.logout() is defined by passport
     req.logout();
     res.status(200).json({ message: 'Log out success!' });

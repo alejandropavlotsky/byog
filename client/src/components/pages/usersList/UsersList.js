@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import UserService from './../../../service/user.service'
 
 import './UserList.css'
+
 import UserCard from './../userCard/UserCard'
 import SearchBar from './../searchBar/SearchBar'
+
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 

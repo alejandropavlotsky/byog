@@ -314,30 +314,30 @@ const games = [
 ]
 const eventReview = [
     {
-        text: "Que dia mas chuli",
+        text: "Hay que repetir"
     },
     {
-        text: "Hay que repetir",
+        text: "Hay que repetir"
     },
     {
-        text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina",
+        text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina"
     },
     {
-        text: "Coincido con Erica",
+        text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina"
     }
 ]
 const gameReviews = [
     {
-        text: "Alguna vez le he visto hacer trampa, tened cuidado",
+        text: "Juegazo ideal para jugar de a dos"
     },
     {
-        text: "Tiene mal perder, pero llega puntual a los eventos",
+        text: "Me ha encantado este juego, podria pasarme horas jugandolo"
     },
     {
-        text: "Es un buen jugador, no hace trampas y llega puntual a los eventos",
+        text: "Juegazo ideal para jugar en grupos grandes"
     },
     {
-        text: "Tiene mal perder, pero llega puntual a los eventos",
+        text: "Me ha encantado este juego, podria pasarme horas jugandolo"
     }
 ]
 

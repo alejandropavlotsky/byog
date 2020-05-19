@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+
 import EventService from '../../../service/events.service'
+
+import moment from 'moment'
+
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import moment from 'moment'
 
 class EventForm extends Component {
 	constructor(props) {

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import GameService from './../../../service/game.service'
 
 import './GameList.css'
+
+import GameService from './../../../service/game.service'
 
 import GameCard from '../gameCard/GameCard'
 import GameForm from '../game-form/GameForm'

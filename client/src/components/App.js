@@ -3,20 +3,24 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css'
-import Home from './pages/home/Home'
-import UserList from './pages/usersList/UsersList'
+
 import GameService from './../service/game.service'
 import EventService from './../service/events.service'
+import AuthService from './../service/auth.service'
+
+import Home from './pages/home/Home'
 import Navigation from './ui/navbar/Navbar'
+import UserList from './pages/usersList/UsersList'
+import UsersDetails from './pages/usersDetails/UsersDetails'
 import GameList from './pages/gameList/GameList'
 import GameDetails from './pages/game-details/GameDetails'
 import EventsList from './pages/eventList/EventList'
 import EventDetails from './pages/eventDetails/EventDetails'
+import Footer from './ui/footer/Footer'
+
 import Signup from './pages/signup/Signup'
 import Login from './pages/login/Login'
 import Profile from './pages/profile/Profile'
-import Footer from './ui/footer/Footer'
-import AuthService from './../service/auth.service'
 
 class App extends Component {
 
@@ -47,12 +51,13 @@ class App extends Component {
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
             <Route path="/users" exact render={() => <UserList loggedInUser={this.state.loggedInUser} />} />
-            <Route path="/users/props._id" exact render={() => <Profile loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/users/:userId._id/profile-ifo" exact render={() => <UsersDetails loggedInUser={this.state.loggedInUser} />} />
 
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
-            <Route path="/profile" render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+            <Route path="/profile" exact render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
+            <Route path="/users/:otherUserId" render={() => this.state.loggedInUser ? <Profile /> : <Redirect to="/" />} />
           </Switch>
 
         </main>

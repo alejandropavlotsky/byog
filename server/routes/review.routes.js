@@ -20,11 +20,16 @@ router.get('/eventreviews/:eventId', (req, res, next) => {
         .then(data => res.json(data))
         .catch(err => next(new Error(err)))
 })
-
+router.get('/gamereviews/:gameId', (req, res, next) => {
+    Review.find({ reviewedInGame: req.params.gameId })
+        .populate('author')
+        .then(data => res.json(data))
+        .catch(err => next (new Error(err)))
+})
 
 router.post('/new-post', (req, res, next) => {
     Review.create(req.body)
-        .then(data => res.json(data))
+        .then(data => console.log(data))
         .catch(err => next(new Error(err)))
 })
 

@@ -10,5 +10,6 @@ export default class services {
 
     getReviews = () => this.service.get('/')
     getEventReviews = (eventId) => this.service.get(`/eventreviews/${eventId}`)
+    getGameReviews = (gameId) => this.service.get(`/gamereviews/${gameId}`)
     saveReview = theReview => this.service.post(`/new-post`, theReview)
 }

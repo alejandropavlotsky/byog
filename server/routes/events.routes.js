@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
 
 const Event = require('../models/events.model')
 const User = require('../models/user.model')
@@ -17,7 +18,7 @@ router.get('/:eventId/details', (req, res, next) => {
 		.catch(err => next(new Error(err)))
 })
 
-router.put('/:eventId/edit', (req, res, next) => {
+router.put('/:eventId/edit', ensureLoggedIn(), (req, res, next) => {
 	Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
 		.then(data => {
 			return Event.findById(data._id)
@@ -29,11 +30,11 @@ router.put('/:eventId/edit', (req, res, next) => {
 		.catch(err => next(new Error(err)))
 })
 
-router.delete('/:eventId/delete', (req, res, next) => {
+router.delete('/:eventId/delete', ensureLoggedIn(), (req, res, next) => {
 	Event.findByIdAndRemove(req.params.eventId).then(response => res.json(response)).catch(err => next(new Error(err)))
 })
 
-router.post('/new-event', (req, res, next) => {
+router.post('/new-event', ensureLoggedIn(), (req, res, next) => {
 	Event.create(req.body).then(data => res.json(data)).catch(err => next(new Error(err)))
 })
 

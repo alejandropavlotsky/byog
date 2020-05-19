@@ -17,6 +17,7 @@ const gameSchema = new Schema({
     },
     price: String,
     language: String,
+    reviews: [{ type: Schema.Types.ObjectId, ref: "Review" }],
     owner: { type: Schema.Types.ObjectId, ref: "User"}
 }, {
     timestamps: true

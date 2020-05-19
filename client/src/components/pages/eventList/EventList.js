@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import EventService from './../../../service/events.service'
 
 import './EventList.css'
+
+import EventService from './../../../service/events.service'
 
 import EventCard from '../eventCard/EventCard'
 import EventForm from '../eventForm/EventForm'

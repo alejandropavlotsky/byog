@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
-import EventService from '../../../service/events.service'
-import ReviewService from '../../../service/review.service'
+import { Link } from 'react-router-dom'
+
 import moment from 'moment'
 import axios from 'axios'
+import GoogleMapReact from 'google-map-react'
+import Spinner from 'react-bootstrap/Spinner'
 
-import { Link } from 'react-router-dom'
+import './EventDetails.css'
+
+import EventService from '../../../service/events.service'
+import ReviewService from '../../../service/review.service'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import Spinner from 'react-bootstrap/Spinner'
 import Toast from 'react-bootstrap/Toast'
-import GoogleMapReact from 'google-map-react'
 
 import ReviewForm from './../reviewForm/ReviewForm'
-import './EventDetails.css'
 
 class EventDetails extends Component {
 	constructor(props) {
@@ -74,7 +76,6 @@ class EventDetails extends Component {
 	updateReviews(newReview) {
 		const reviewsCopy = [...this.state.reviews, newReview] 
 		console.log(reviewsCopy)
-		console.log(reviewsCopy, "Reviews Copy")
 
 		this.setState({...this.state, reviews: reviewsCopy})
 	}
@@ -122,7 +123,7 @@ class EventDetails extends Component {
 	}
 	render() {
 		if (this.state.event) {
-			const { author, title, description, location, attendance, gameDate, reviews, assistance } = this.state.event
+			const { author, title, description, location, attendance, gameDate, assistance } = this.state.event
 
 			const isAttending =
 				this.props.loggedInUser &&
@@ -209,7 +210,7 @@ class EventDetails extends Component {
 							)}
 						
 							<h4>Rese&#241;as: </h4>
-							{this.state.reviews && this.state.reviews.map(review => <div className="review-box"><p> <strong>Autor:</strong>  {review.author.username}</p>  <p>{review.text}</p> </div>)}
+							{this.state.reviews && this.state.reviews.map(review => <div className="review-box"><p> <strong>Autor:</strong>  {review.author.username}</p>  <p> {review.text}</p> </div>)}
 							
 						</Col>
 					</Row>
@@ -239,7 +240,7 @@ class EventDetails extends Component {
 			)
 		} else {
 			return (
-				<Spinner animation='border' role='status'>
+				<Spinner className="justify-content-center" animation='border' role='status'>
 					<span className='sr-only'>Loading...</span>
 				</Spinner>
 			)

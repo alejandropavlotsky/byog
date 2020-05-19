@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
+
+import './GameForm.css'
+
 import GameService from '../../../service/game.service'
 import FileService from '../../../service/file.service'
+
 import Container from 'react-bootstrap/Container'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import './GameForm.css'
+
 const utils = require('../../../utils/gameDificultyOptions')
 
 class GameForm extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			title: props.title || '',
-			description: props.description || '',
-			author: props.author || '',
-			gameImg: props.gameImg || '',
-			theme: props.theme || '',
-			ageRange: props.ageRange || '',
-			numOfPlayers: props.numOfPlayers || '',
-			gameTime: props.gameTime || '',
-			difficulty: props.difficulty || utils[0].label,
-			price: props.price || '',
-			language: props.language || 'Español',
-			owner: props.loggedInUser._id
+			title: this.props.title || '',
+			description: this.props.description || '',
+			author: this.props.author || '',
+			gameImg: this.props.gameImg || '',
+			theme: this.props.theme || '',
+			ageRange: this.props.ageRange || '',
+			numOfPlayers: this.props.numOfPlayers || '',
+			gameTime: this.props.gameTime || '',
+			difficulty: this.props.difficulty || utils[0].label,
+			price: this.props.price || '',
+			language: this.props.language || 'Español',
+			owner: this.props.loggedInUser._id
 		}
 		this.gameService = new GameService()
 		this.filesService = new FileService()
