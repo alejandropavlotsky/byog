@@ -34,7 +34,6 @@ class GameForm extends Component {
 
 	handleInputChange = e => {
 		const { name, value } = e.target
-
 		this.setState({
 			[name]: value
 		})
@@ -68,9 +67,10 @@ class GameForm extends Component {
 	}
 
 	render() {
-		return (
+		console.log(this.state)
+			return (
 			<Container className='game-form'>
-				{this.props.title ? <h1>Actualizar juego</h1> : <h1>Nuevo juego</h1>}
+				{this.state.title ? <h1>Actualizar juego</h1> : <h1>Nuevo juego</h1>}
 				<hr />
 				<Form onSubmit={this.handleSubmit}>
 					<Form.Group controlId='title'>
@@ -274,7 +274,7 @@ class GameForm extends Component {
 						Cerrar
 					</Button>
 					<Button variant='success' className='btn-one' type='submit'>
-						{this.props.title ? 'Actualizar juego' : 'Crear juego'}
+						{this.state.title ? 'Actualizar juego' : 'Crear juego'}
 					</Button>
 				</Form>
 			</Container>

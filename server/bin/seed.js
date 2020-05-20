@@ -356,6 +356,18 @@ const eventReview = [
     },
     {
         text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina"
+    },
+    {
+        text: "Hay que repetir"
+    },
+    {
+        text: "Hay que repetir"
+    },
+    {
+        text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina"
+    },
+    {
+        text: "Lo que mas me ha gustado fueron los margaritas junto a la psicina"
     }
 ]
 const gameReviews = [
@@ -413,6 +425,10 @@ User.create(users)
                     .then(() => Review.findByIdAndUpdate(allEventReviews[1], {author: allUsers[1], reviewedInEvent: allEvents[1]}, {new:true}))
                     .then(() => Review.findByIdAndUpdate(allEventReviews[2], {author: allUsers[2], reviewedInEvent: allEvents[3]}, {new:true}))
                     .then(() => Review.findByIdAndUpdate(allEventReviews[3], {author: allUsers[5], reviewedInEvent: allEvents[2]}, {new:true}))
+                    .then(() => Review.findByIdAndUpdate(allEventReviews[4], {author: allUsers[2], reviewedInEvent: allEvents[2]}, {new:true}))
+                    .then(() => Review.findByIdAndUpdate(allEventReviews[5], {author: allUsers[6], reviewedInEvent: allEvents[4]}, {new:true}))
+                    .then(() => Review.findByIdAndUpdate(allEventReviews[6], {author: allUsers[3], reviewedInEvent: allEvents[5]}, {new:true}))
+                    .then(() => Review.findByIdAndUpdate(allEventReviews[7], {author: allUsers[4], reviewedInEvent: allEvents[7]}, {new:true}))
                     .catch(err => console.log(err))
         })
         

@@ -117,8 +117,8 @@ class GameDetails extends Component {
 								Dejar comentario
 							</Button>
                         )}
-                        <h4>Comentarios</h4>
-                        {this.state.games && this.state.games.map(review => <div className="review-box"> <p> <strong>Autor: </strong> {review.author.username} </p> <p>{review.text}</p> </div>)}
+                        {/* <h4>Comentarios</h4>
+                        {this.state.games && this.state.games.map(review => <div className="review-box"> <p> <strong>Autor: </strong> {review.author.username} </p> <p>{review.text}</p> </div>)} */}
 					</Col>
 				</Row>
 				<Row>

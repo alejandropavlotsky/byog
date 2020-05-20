@@ -73,10 +73,12 @@ class EventDetails extends Component {
 		}
 	}
 
-	updateReviews(newReview) {
-		const reviewsCopy = [...this.state.reviews, newReview] 
-		this.setState({...this.state, reviews: reviewsCopy})
-	}
+	// updateReviews =(newReview) => {
+	// 	const reviewsCopy = [...this.state.reviews, newReview] 
+	// 	this.setState({ reviews: reviewsCopy }, () => {
+	// 		console.log(this.state)
+	// 	})
+	// }
 
 	getEventsReviews() {
 		this.reviewService.getEventReviews(this.props.match.params.eventId)
@@ -215,9 +217,10 @@ class EventDetails extends Component {
 					<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
 						<Modal.Body>
 							<ReviewForm
+								refreshReviews={this.getEventsReviews}
 								loggedInUser={this.props.loggedInUser}
 								eventId={this.state.event._id}
-								updateReviews={this.updateReviews}
+								// updateReviews={this.updateReviews}
 								closeModal={() => this.handleModal(false)}
 							/>
 						</Modal.Body>

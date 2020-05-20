@@ -25,25 +25,24 @@ class Profile extends Component {
         this.state = {
             modalShow: false,
             modalContent: undefined,
-            toast: {
-                show: false,
-                text: ''
-            },
+            // toast: {
+            //     show: false,
+            //     text: ''
+            // },
             profileData: null
         }
         this.UserService = new UserService()
         this.GameService = new GameService()
         this.EventService = new EventService()
-        
     }
 
     handleModal = (visible, modalContent) => this.setState({ modalShow: visible, modalContent })
-    handletoast = (visible, text = '') => {
-        const toastCopy = { ...this.state.toast }
-        toastCopy.show = visible
-        toastCopy.text = text
-        this.setState({ toast: toastCopy })
-    }
+    // handletoast = (visible, text = '') => {
+    //     const toastCopy = { ...this.state.toast }
+    //     toastCopy.show = visible
+    //     toastCopy.text = text
+    //     this.setState({ toast: toastCopy })
+    // }
 
     finishGamePost = () => {
         this.handleModal(false, {})
@@ -63,8 +62,8 @@ class Profile extends Component {
             .then(() => this.getProfileInfo())
             .catch(err => console.log(err))
     }
-    deleteFavorite(gameId) {
-        this.GameService.deleteFavorite(gameId)
+    deleteFavorite(favId) {
+        this.UserService.deleteFavorite(favId)
             .then(() => this.getProfileInfo())
             .catch(err => console.log(err))
     }
@@ -81,7 +80,9 @@ class Profile extends Component {
 
     render() {
         this.state.profileData && 
-        console.log(this.state.profileData.user, "|", this.props.profileData)
+            console.log(this.state.profileData.user, "|", this.props.profileData)
+                                           console.log( this.state.modalContent)
+        
         return (
             <>
                 <Container>
@@ -89,9 +90,7 @@ class Profile extends Component {
                         this.state.profileData &&
                         <>
                             {this.props.loggedInUser ?  <><h1>&#161;Bienvend@, {this.props.loggedInUser.username}!</h1><h1>Mis juegos</h1> </> : <div className="back-button-users"><h1>Los juegos de {this.state.profileData.user.username}</h1><Link to="/users" className="btn btn-success btn-sm edit-btn">Volver</Link></div>}
-                       
-                            
-                                <Row className="justify-content-center">    
+                                <Row className="justify-content-center">
                                     {
                                         this.state.profileData.games &&
                                         this.state.profileData.games.map(game =>          
@@ -99,15 +98,16 @@ class Profile extends Component {
                                                 <p className="btn-one">{game.title}</p>
                                                 <img src={game.gameImg} alt="gameImg" className="profile-game-img"/>
                                                 <div className="profile-game-details-buttons">
-                                                    {this.state.profileData.user &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn">Editar</Button>}
-                                                    {this.state.profileData.user &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn">Borrar</Button>} 
+                                                    {this.state.profileData.user &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn btn-one">Editar</Button>}
+                                                    {this.state.profileData.user &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn btn-one">Borrar</Button>} 
                                                 </div>
                                             </Col>)
-                                        }
+                                    }
                                     <Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
                                         <Modal.Body>
                                             {
-                                                this.state.modalContent === 'game' ?
+                                            this.state.modalContent === 'game' ?
+                                                
                                                 <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
                                                 :
                                                 <EventForm loggedInUser={this.props.loggedInUser} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)} />
@@ -116,9 +116,7 @@ class Profile extends Component {
                                     </Modal>
                                 </Row>
                         </>
-                    }
-                    
-                            
+                    }       
                     {
                         this.state.profileData &&
                             <>
@@ -131,8 +129,8 @@ class Profile extends Component {
                                                         <p>{event.title}</p>
                                                         <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
                                                         <div className="profile-event-details-buttons">
-                                                            {this.state.profileData.user  && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm">Editar</Button>}
-                                                            {this.state.profileData.user  && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>}
+                                                            {this.state.profileData.user  && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm btn-one">Editar</Button>}
+                                                            {this.state.profileData.user  && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm btn-one">Borrar</Button>}
                                                         </div>
                                                 </Col>)
                                                 }
@@ -148,7 +146,8 @@ class Profile extends Component {
                                             this.state.profileData.user.favorites.map(fav =>
                                                 <Col md={3} key={fav._id} className="profile-event-details">
                                                     <p>{fav.title}</p>
-                                                    {this.state.profileData.user === this.props.loggedInUser && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn btn-success btn-sm">Borrar</Button>}
+                                                    <img src={fav.gameImg} alt="gameImg" className="profile-game-img"/>
+                                                    {this.state.profileData.user._id && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn btn-success btn-sm btn-one">Quitar de favoritos</Button>}
                                               </Col>)
                                         }
                                     </Row>

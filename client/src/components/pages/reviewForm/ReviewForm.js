@@ -21,17 +21,24 @@ class ReviewForm extends Component {
 
     handleInputChange = e => {
         const { name, value } = e.target
-        this.setState({[name]: value})
+        this.setState({
+            [name]: value
+        })
+    }
+    finishAction = () => {
+        this.props.hideModalWindow()
+        this.props.refreshReviews()
     }
 
     handleSubmit = e => {
         e.preventDefault()
         this.reviewService.saveReview(this.state)
-            .then(response => this.setState(response.data, () => {
-                this.props.updateReviews(this.state)
-            } ))
+            .then(() => this.finishAction())
             .catch(err => console.log(err))
+        
     }
+    // .then(response => this.props.updateReviews(response.data))
+    // .catch(err => console.log(err))
 
     render() {
 
