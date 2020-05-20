@@ -99,6 +99,38 @@ const events = [
         attendance: 10,
         gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
 
+    },
+    {
+        title: "noche de juegos",
+        description: "Tengo la casa pra mi solo, asi que organizo noche de juegos para el/la que quiera venir",
+        location: "Calle Alcala 200",
+        attendance: 6,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+    },  
+    {
+        title: "noche de juegos",
+        description: "Os invito a jugar a mi mansion",
+        location: "Calle Alcala 180",
+        attendance: 4,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+
+
+    },
+    {
+        title: "Noche de trivial",
+        description: "Por favor el que tenga el trivial que lo traiga, yo pongo la casa y la comida :D",
+        location: "Calle Toledo 10",
+        attendance: 7,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+
+    },    
+    {
+        title: "Maraton de Time Stories",
+        description: "Pues eso, jugamos al Time Stories hasta que aguante el cuerpo",
+        location: "Calle Toledo 25",
+        attendance: 10,
+        gameDate: moment("20/05/2020 5:00PM", "DD/MM/YYYY h:mmA").parseZone().toDate(),
+
     }  
 ]
 
@@ -364,7 +396,11 @@ User.create(users)
             .then(() => Events.findByIdAndUpdate(allEvents[0], {author: allUsers[0]}, {new:true}))
             .then(() => Events.findByIdAndUpdate(allEvents[1], {author: allUsers[1]}, {new:true}))
             .then(() => Events.findByIdAndUpdate(allEvents[2], {author: allUsers[2]}, {new:true}))
-            .then(() => Events.findByIdAndUpdate(allEvents[3], {author: allUsers[5]}, {new:true}))
+            .then(() => Events.findByIdAndUpdate(allEvents[3], {author: allUsers[3]}, {new:true}))
+            .then(() => Events.findByIdAndUpdate(allEvents[4], {author: allUsers[4]}, {new:true}))
+            .then(() => Events.findByIdAndUpdate(allEvents[5], {author: allUsers[4]}, {new:true}))
+            .then(() => Events.findByIdAndUpdate(allEvents[6], {author: allUsers[5]}, {new:true}))
+            .then(() => Events.findByIdAndUpdate(allEvents[7], {author: allUsers[6]}, {new:true}))
             .catch(err => console.log(err))
             .then(() => {
                 Review.create(eventReview)

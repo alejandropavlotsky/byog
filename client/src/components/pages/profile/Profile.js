@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import UserService from '../../../service/user.service'
 import GameService from '../../../service/game.service'
@@ -61,7 +62,11 @@ class Profile extends Component {
         this.GameService.deleteGame(gameId)
             .then(() => this.getProfileInfo())
             .catch(err => console.log(err))
-
+    }
+    deleteFavorite(gameId) {
+        this.GameService.deleteFavorite(gameId)
+            .then(() => this.getProfileInfo())
+            .catch(err => console.log(err))
     }
 
     getProfileInfo(id) {
@@ -75,15 +80,17 @@ class Profile extends Component {
 
 
     render() {
-        const { favorites } = this.props;
+        this.state.profileData && 
+        console.log(this.state.profileData.user, "|", this.props.profileData)
         return (
             <>
                 <Container>
                     {
-                        !this.state.profileData ? null :
+                        this.state.profileData &&
                         <>
-                        <h1>&#161;Bienvend@, {this.state.profileData.user.username}!</h1>
-                            <h1>Mis juegos</h1>
+                            {this.props.loggedInUser ?  <><h1>&#161;Bienvend@, {this.props.loggedInUser.username}!</h1><h1>Mis juegos</h1> </> : <div className="back-button-users"><h1>Los juegos de {this.state.profileData.user.username}</h1><Link to="/users" className="btn btn-success btn-sm edit-btn">Volver</Link></div>}
+                       
+                            
                                 <Row className="justify-content-center">    
                                     {
                                         this.state.profileData.games &&
@@ -92,8 +99,8 @@ class Profile extends Component {
                                                 <p className="btn-one">{game.title}</p>
                                                 <img src={game.gameImg} alt="gameImg" className="profile-game-img"/>
                                                 <div className="profile-game-details-buttons">
-                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn">Editar</Button>}
-                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn">Borrar</Button>} 
+                                                    {this.state.profileData.user &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn">Editar</Button>}
+                                                    {this.state.profileData.user &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn">Borrar</Button>} 
                                                 </div>
                                             </Col>)
                                         }
@@ -113,39 +120,40 @@ class Profile extends Component {
                     
                             
                     {
-                        !this.state.profileData ? null :
+                        this.state.profileData &&
                             <>
-                                <h1>Mis Eventos</h1>
-                                    <Row className="justify-content-center">
-                                        
-                                        {
-                                            this.state.profileData.events &&
-                                            this.state.profileData.events.map(event =>
-                                                <Col md={3} key={event._id} className="profile-event-details">
-                                                    <p>{event.title}</p>
-                                                    <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
-                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm">Editar</Button>}
-                                                    {this.state.profileData && this.state.profileData.user._id === this.props.loggedInUser._id && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>}
-                                              </Col>)
-                                            }
-                                    </Row>
+                                {this.props.loggedInUser ? <h1>Mis Eventos</h1> : <div className="back-button-users"><h1>Los eventos de {this.state.profileData.user.username}</h1></div>}
+                                        <Row className="justify-content-center">
+                                            {
+                                                this.state.profileData.events &&
+                                                this.state.profileData.events.map(event =>
+                                                    <Col md={3} key={event._id} className="profile-event-details">
+                                                        <p>{event.title}</p>
+                                                        <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
+                                                        <div className="profile-event-details-buttons">
+                                                            {this.state.profileData.user  && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm">Editar</Button>}
+                                                            {this.state.profileData.user  && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm">Borrar</Button>}
+                                                        </div>
+                                                </Col>)
+                                                }
+                                        </Row>
                             </>
                     }
-                    {/* {
-                        !this.state.profileData ? null :
+                    {
+                        this.state.profileData &&
                             <>
                                 <h1>Mis Juegos Favoritos</h1>
                                     <Row className="justify-content-center">
                                         {
-                                            this.state.favorites.map(fav =>
+                                            this.state.profileData.user.favorites.map(fav =>
                                                 <Col md={3} key={fav._id} className="profile-event-details">
                                                     <p>{fav.title}</p>
-                                                    <Button onClick={() => this.deleteEvent(fav._id)} className="btn btn-success btn-sm">Borrar</Button>
+                                                    {this.state.profileData.user === this.props.loggedInUser && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn btn-success btn-sm">Borrar</Button>}
                                               </Col>)
                                         }
                                     </Row>
                             </>
-                    }   */}
+                    }  
                 </Container>
             </>
         )

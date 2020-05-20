@@ -28,7 +28,7 @@ class GameCard extends Component {
 							Ver detalles
 						</Link>
 						{this.props.loggedInUser && (
-							<Button onClick={this.addFavorite} loggedInUser={this.state.loggedInUser} variant="success" block style={{ marginBottom: '20px' }}
+							<Button onClick={() => this.props.addFavorite(this.props._id)} loggedInUser={this.state.loggedInUser} variant="success" block style={{ marginBottom: '20px' }}
 							className='btn-one'>Agregar a Favoritos</Button>
 						)}
 					</Card.Body>

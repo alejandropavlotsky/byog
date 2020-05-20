@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import './GameList.css'
 
 import GameService from './../../../service/game.service'
+import UserService from './../../../service/user.service'
 
 import GameCard from '../gameCard/GameCard'
 import GameForm from '../game-form/GameForm'
@@ -28,13 +29,16 @@ class GameList extends Component {
 			favorites: []
 		}
 		this.gameService = new GameService()
+		this.userService = new UserService()
 	}
 
 	addFavorite = favorite => {
-		const { favorites } = this.state
-		console.log(favorites)
-		if (!favorites.some(alreadyFav => alreadyFav._id === favorite._id) ){
-			this.setState({ favorites: this.state.favorites, favorite })
+		let favoritesCopy = [...this.state.favorites]
+		if (!this.state.favorites.some(alreadyFav => alreadyFav._id === favorite)) {
+			favoritesCopy = [...favoritesCopy, favorite]
+			this.setState({ ...this.state, favorites: favoritesCopy }, () => {
+				this.userService.editUser(this.props.loggedInUser._id, this.state)
+			})
 		}
 	}
 
@@ -90,7 +94,7 @@ class GameList extends Component {
 					{!this.state.games.length && <p>No se encontraron resultados</p>}
 				</div>
 
-				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm} loggedInUser={this.props.loggedInUser}/>)}</Row>
+				<Row className='games-list'>{this.state.games.map(elm => <GameCard key={elm._id} {...elm} addFavorite={() => this.addFavorite(elm._id)} loggedInUser={this.props.loggedInUser}/>)}</Row>
 
 				<Modal show={this.state.modalShow} onHide={() => this.handleModal(false)}>
 					<Modal.Body>

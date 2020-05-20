@@ -14,25 +14,33 @@ router.get('/', (req, res, next) => {
 })
 
 router.get('/:userId', (req, res, next) => {
-    console.log(req.params.userId, "HOLA")
+    console.log("hola")
     User.findById(req.params.userId)
-        .then((data) =>res.json(data))
+    console.log("chau")
+        
+        .populate('favorites')
+        .then((data) => res.json(data))
         .catch(err => next(new Error(err)))
-
 })
 
 router.get('/:userId/profile-info', (req, res, next) => {
-
+    
     let userPromise = User.findById(req.params.userId)
     let gamePromise = Games.find({ owner: req.params.userId })
     let eventPromise = Events.find({ author: req.params.userId })
     let reviewPromise = Review.find({ author: req.params.userId })
     
     let allPromises = [userPromise, gamePromise, eventPromise, reviewPromise]
-
+    
     Promise.all(allPromises)
-        .then(data => res.json({user: data[0], games: data[1], events: data[2], reviews: data[3] }))
-        .catch(err => next(new Error(err)))
+    .then(data => res.json({user: data[0], games: data[1], events: data[2], reviews: data[3] }))
+    .catch(err => next(new Error(err)))
 })
 
+router.post('/:userId/edit', (req, res, next) => {
+    User.findByIdAndUpdate(req.params.userId, req.body, { new: true })
+        .populate('favorites')
+        .then(data => res.json(data))
+        .catch(err => next(new Error(err)))
+})
 module.exports = router

@@ -15,8 +15,15 @@
 .profile-game-img{
     width: 100px;
 }
-.profile-game-details-buttons{
+.profile-game-details-buttons,
+.profile-event-details-buttons {
     margin-top: 16px;
     display: flex;
     justify-content: space-around;
+}
+.back-button-users{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
 }

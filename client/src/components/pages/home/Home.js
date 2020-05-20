@@ -44,11 +44,12 @@ class Home extends Component {
     render() {
         return (
             <>
+                <img className="main-section-img" src="./img/bg.jpeg" alt="bg"/>
                 <section className="main-section">
                     <div className="fadeIn">
                         <h1>Bienvenido a BYOG </h1>
                         <h2>(Bring Your Own Game)</h2>
-                        <p>En esta página puedes subir tus propios juegos, ver los juegos que tienen los demás, asistir a eventos creados por los mismos usuarios, dejar opiniones sobre sus juegos, y sobre los eventos a los que has asistido.</p>
+                        <p>Comparte tus juegos con el resto de la comunidad, mira cuales son los juegos que tienen los demás, asiste a eventos, deja comentarios en los eventos a los que hayas asistido,</p> <p id="disfruta"> <strong>y sobre todo disfruta...</strong> </p>
 
                     </div>
                 </section>
