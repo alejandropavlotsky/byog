@@ -75,7 +75,7 @@ class Profile extends Component {
 
 
     render() {
-        // const { favorites } = this.props;
+        const { favorites } = this.props;
         return (
             <>
                 <Container>
@@ -137,7 +137,7 @@ class Profile extends Component {
                                 <h1>Mis Juegos Favoritos</h1>
                                     <Row className="justify-content-center">
                                         {
-                                            favorites.map(fav =>
+                                            this.state.favorites.map(fav =>
                                                 <Col md={3} key={fav._id} className="profile-event-details">
                                                     <p>{fav.title}</p>
                                                     <Button onClick={() => this.deleteEvent(fav._id)} className="btn btn-success btn-sm">Borrar</Button>
@@ -145,10 +145,7 @@ class Profile extends Component {
                                         }
                                     </Row>
                             </>
-                    } */}
-                    
-
-                      
+                    }   */}
                 </Container>
             </>
         )

@@ -12,8 +12,8 @@ class GameCard extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
-	
 	}
+	
 
 	render() {
 		return (
@@ -27,8 +27,8 @@ class GameCard extends Component {
 							className='btn btn-success btn-block btn-sm btn-one'>
 							Ver detalles
 						</Link>
-						{!this.props.loggedInUser && (
-							<Button onClick={this.addFavorite} variant="success" block style={{ marginBottom: '20px' }}
+						{this.props.loggedInUser && (
+							<Button onClick={this.addFavorite} loggedInUser={this.state.loggedInUser} variant="success" block style={{ marginBottom: '20px' }}
 							className='btn-one'>Agregar a Favoritos</Button>
 						)}
 					</Card.Body>
