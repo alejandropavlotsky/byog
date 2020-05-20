@@ -33,14 +33,21 @@ class EventForm extends Component {
 
 	handleSubmit = e => {
 		e.preventDefault()
+		
 		const { gameTimeAsDate, gameHourAsDate } = this.state
 		const gameHourMoment = moment(gameHourAsDate).parseZone()
 		const gameDate = moment(gameTimeAsDate).parseZone().hour(gameHourMoment.hour()).minute(gameHourMoment.minute())
-		console.log(gameDate, gameHourMoment, gameHourAsDate)
-		this.eventService
-			.saveEvent({ ...this.state, gameDate, _id: this.props._id })
-			.then(() => this.props.finishEventPost())
-			.catch(err => console.log(err))
+		if (this.props.title) {
+			this.eventService
+				.editEvent({ ...this.state, gameDate, _id: this.props._id })
+				.then(() => this.props.finishEventPost())
+				.catch(err => console.log(err))
+		} else {
+			this.eventService
+				.saveEvent({ ...this.state, gameDate, _id: this.props._id })
+				.then(() => this.props.finishEventPost())
+				.catch(err => console.log(err))	
+		}
 	}
 
 	render() {

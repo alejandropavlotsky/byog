@@ -26,7 +26,7 @@ class ReviewForm extends Component {
         })
     }
     finishAction = () => {
-        this.props.hideModalWindow()
+        this.props.closeModal()
         this.props.refreshReviews()
     }
 

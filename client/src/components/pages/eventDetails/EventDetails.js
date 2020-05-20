@@ -80,7 +80,8 @@ class EventDetails extends Component {
 	// 	})
 	// }
 
-	getEventsReviews() {
+	getEventsReviews = () => {
+		console.warn("getEventReviews")
 		this.reviewService.getEventReviews(this.props.match.params.eventId)
 			.then(response => this.setState({ reviews: response.data}))
 			.catch(err => console.log(err))

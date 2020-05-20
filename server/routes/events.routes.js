@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { ensureLoggedIn, ensureLoggedOut } = require("connect-ensure-login");
+const { ensureLoggedIn, ensureLoggedOut } = require('connect-ensure-login')
 
 const Event = require('../models/events.model')
 const User = require('../models/user.model')
@@ -21,10 +21,7 @@ router.get('/:eventId/details', (req, res, next) => {
 router.put('/:eventId/edit', ensureLoggedIn(), (req, res, next) => {
 	Event.findByIdAndUpdate(req.params.eventId, req.body, { new: true })
 		.then(data => {
-			return Event.findById(data._id)
-				.populate('author')
-				.populate('assistance')
-				.populate('reviews')
+			return Event.findById(data._id).populate('author').populate('assistance').populate('reviews')
 		})
 		.then(data => res.json(data))
 		.catch(err => next(new Error(err)))

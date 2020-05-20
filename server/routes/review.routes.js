@@ -29,7 +29,7 @@ router.get('/gamereviews/:gameId', (req, res, next) => {
 
 router.post('/new-post', (req, res, next) => {
     Review.create(req.body)
-        .then(data => console.log(data))
+        .then(data => res.json(data))
         .catch(err => next(new Error(err)))
 })
 

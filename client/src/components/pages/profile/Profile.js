@@ -25,6 +25,7 @@ class Profile extends Component {
         this.state = {
             modalShow: false,
             modalContent: undefined,
+            editableObject: {},
             // toast: {
             //     show: false,
             //     text: ''
@@ -36,7 +37,7 @@ class Profile extends Component {
         this.EventService = new EventService()
     }
 
-    handleModal = (visible, modalContent) => this.setState({ modalShow: visible, modalContent })
+    handleModal = (visible, modalContent = '', object = {}) => this.setState({ modalShow: visible, modalContent, editableObject: object })
     // handletoast = (visible, text = '') => {
     //     const toastCopy = { ...this.state.toast }
     //     toastCopy.show = visible
@@ -53,18 +54,18 @@ class Profile extends Component {
     
     deleteEvent(eventId) {
         this.EventService.deleteEvent(eventId)
-            .then(() => this.getProfileInfo())
+            .then(() => this.getProfileInfo(this.props.loggedInUser._id))
             .catch(err => console.log(err))
     }
 
     deleteGame(gameId) {
         this.GameService.deleteGame(gameId)
-            .then(() => this.getProfileInfo())
+            .then(() => this.getProfileInfo( this.props.loggedInUser._id))
             .catch(err => console.log(err))
     }
     deleteFavorite(favId) {
-        this.UserService.deleteFavorite(favId)
-            .then(() => this.getProfileInfo())
+        this.UserService.deleteFavorite(this.props.loggedInUser._id, favId)
+            .then(() => this.getProfileInfo(this.props.loggedInUser._id))
             .catch(err => console.log(err))
     }
 
@@ -98,8 +99,8 @@ class Profile extends Component {
                                                 <p className="btn-one">{game.title}</p>
                                                 <img src={game.gameImg} alt="gameImg" className="profile-game-img"/>
                                                 <div className="profile-game-details-buttons">
-                                                    {this.state.profileData.user &&  <Button onClick={() => this.handleModal(true, 'game')} className="btn btn-success btn-sm edit-btn btn-one">Editar</Button>}
-                                                    {this.state.profileData.user &&  <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn btn-one">Borrar</Button>} 
+                                                    {this.state.profileData.user && this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.handleModal(true, 'game', game)} className="btn btn-success btn-sm edit-btn btn-one">Editar</Button>}
+                                                    {this.state.profileData.user &&  this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.deleteGame(game._id)} className="btn btn-success btn-sm dlt-btn btn-one">Borrar</Button>} 
                                                 </div>
                                             </Col>)
                                     }
@@ -108,9 +109,9 @@ class Profile extends Component {
                                             {
                                             this.state.modalContent === 'game' ?
                                                 
-                                                <GameForm loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} />
+                                                <GameForm  loggedInUser={this.props.loggedInUser} finishGamePost={this.finishGamePost} closeModal={() => this.handleModal(false)} {...this.state.editableObject}/>
                                                 :
-                                                <EventForm loggedInUser={this.props.loggedInUser} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)} />
+                                                <EventForm loggedInUser={this.props.loggedInUser} finishEventPost={this.finishEventPost} closeModal={() => this.handleModal(false)} {...this.state.editableObject}/>
                                             }
                                         </Modal.Body>
                                     </Modal>
@@ -129,8 +130,8 @@ class Profile extends Component {
                                                         <p>{event.title}</p>
                                                         <p>{moment(event.gameDate).format("DD/MM/YYYY h:mmA")}</p>
                                                         <div className="profile-event-details-buttons">
-                                                            {this.state.profileData.user  && <Button onClick={() => this.handleModal(true, 'event')} className="btn btn-success btn-sm btn-one">Editar</Button>}
-                                                            {this.state.profileData.user  && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm btn-one">Borrar</Button>}
+                                                            {this.state.profileData.user  && this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.handleModal(true, 'event', event)} className="btn btn-success btn-sm btn-one">Editar</Button>}
+                                                            {this.state.profileData.user  && this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.deleteEvent(event._id)} className="btn btn-success btn-sm btn-one">Borrar</Button>}
                                                         </div>
                                                 </Col>)
                                                 }
@@ -140,14 +141,15 @@ class Profile extends Component {
                     {
                         this.state.profileData &&
                             <>
-                                <h1>Mis Juegos Favoritos</h1>
+                                {this.props.loggedInUser ? <h1>Mis Juegos Favoritos</h1> : <div className="back-button-users"><h1>Los Favoritos de {this.state.profileData.user.username}</h1></div>}
                                     <Row className="justify-content-center">
-                                        {
+                                {
+                                                this.state.profileData.user &&
                                             this.state.profileData.user.favorites.map(fav =>
                                                 <Col md={3} key={fav._id} className="profile-event-details">
                                                     <p>{fav.title}</p>
                                                     <img src={fav.gameImg} alt="gameImg" className="profile-game-img"/>
-                                                    {this.state.profileData.user._id && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn btn-success btn-sm btn-one">Quitar de favoritos</Button>}
+                                                    {this.state.profileData.user._id && this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn btn-success btn-sm btn-one">Quitar de favoritos</Button>}
                                               </Col>)
                                         }
                                     </Row>
