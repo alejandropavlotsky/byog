@@ -10,12 +10,12 @@ const UserCard = props => {
 	return (
 		<Col lg={3} md={6}>
 			<Card as='article' className='box'>
-				<Card.Img className='card-image' variant='top' src={props.userImage} />
+				<Card.Img className='card-image-user' variant='top' src={props.userImage} />
 				<Card.Body>
 					<Card.Title>{props.username}</Card.Title>
 					<Link
 						to={`/users/${props._id}`}
-						className='btn btn-success btn-block btn-sm btn-one'>
+						className='btn btn-block btn-sm btn-one'>
 						Ver detalles
 					</Link>
 				</Card.Body>

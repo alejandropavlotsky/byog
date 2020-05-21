@@ -22,7 +22,7 @@ class Navigation extends Component {
     render() {
 
         return (
-            <Navbar bg="success" variant="dark" expand="md">
+            <Navbar variant="dark" expand="md">
                 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">

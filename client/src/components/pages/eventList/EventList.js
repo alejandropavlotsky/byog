@@ -66,7 +66,6 @@ class EventsList extends Component {
 					{this.props.loggedInUser && (
 						<Button
 							onClick={() => this.handleModal(true)}
-							variant='success'
 							block
 							style={{ marginBottom: '20px' }}
 							className='btn-one'>

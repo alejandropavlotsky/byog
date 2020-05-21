@@ -16,3 +16,11 @@
 .image-button-game-detail img{
     margin-bottom: 50px;
 }
+.btn-game-details{
+    border: none;
+}
+.btn-game-details:hover{
+    background-color: #2a9d8f;
+    border: none;
+    color: #264653;
+}

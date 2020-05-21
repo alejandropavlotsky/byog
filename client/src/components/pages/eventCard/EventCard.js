@@ -19,7 +19,7 @@ const EventCard = props => {
                     </div>
                     <Card.Text>{props.location}</Card.Text>
 
-                    <Link to={`/events/${props._id}/details`} className="btn btn-success btn-block btn-sm btn-one">Ver detalles</Link>
+                    <Link to={`/events/${props._id}/details`} className="btn btn-block btn-sm btn-one">Ver detalles</Link>
                 </Card.Body>
             </Card>
         </Col>

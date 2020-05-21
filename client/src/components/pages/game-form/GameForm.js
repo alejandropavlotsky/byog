@@ -267,13 +267,12 @@ class GameForm extends Component {
 					</Form.Group>
 
 					<Button
-						variant='success'
 						onClick={() => this.props.closeModal()}
 						style={{ marginRight: '10px' }}
 						className='btn-one'>
 						Cerrar
 					</Button>
-					<Button variant='success' className='btn-one' type='submit'>
+					<Button className='btn-one' type='submit'>
 						{this.state.title ? 'Actualizar juego' : 'Crear juego'}
 					</Button>
 				</Form>

@@ -24,11 +24,11 @@ class GameCard extends Component {
 						<Card.Title>{this.props.title}</Card.Title>
 						<Link
 							to={`/games/${this.props._id}/details`}
-							className='btn btn-success btn-block btn-sm btn-one'>
+							className='btn btn-block btn-sm btn-one'>
 							Ver detalles
 						</Link>
 						{this.props.loggedInUser && (
-							<Button onClick={() => this.props.addFavorite(this.props._id)} loggedInUser={this.state.loggedInUser} variant="success" block style={{ marginBottom: '20px' }}
+							<Button onClick={() => this.props.addFavorite(this.props._id)} loggedInUser={this.state.loggedInUser} block style={{ marginBottom: '20px' }}
 							className='btn-one'>Agregar a Favoritos</Button>
 						)}
 					</Card.Body>

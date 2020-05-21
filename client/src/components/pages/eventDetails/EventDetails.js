@@ -40,6 +40,7 @@ class EventDetails extends Component {
 		}
 		this.reviewService = new ReviewService()
 		this.eventService = new EventService()
+        this.goBack = this.goBack.bind(this);
 	}
 
 	static defaultProps = {
@@ -49,6 +50,9 @@ class EventDetails extends Component {
 		},
 		zoom: 16
 	}
+
+
+	goBack(){this.props.history.goBack()}
 
 	handleModal = visible => this.setState({ modalShow: visible })
 	handleToast = (visible, text = '') => {
@@ -73,12 +77,6 @@ class EventDetails extends Component {
 		}
 	}
 
-	// updateReviews =(newReview) => {
-	// 	const reviewsCopy = [...this.state.reviews, newReview] 
-	// 	this.setState({ reviews: reviewsCopy }, () => {
-	// 		console.log(this.state)
-	// 	})
-	// }
 
 	getEventsReviews = () => {
 		console.warn("getEventReviews")
@@ -154,14 +152,14 @@ class EventDetails extends Component {
 								</GoogleMapReact>
 							</div>
 							<div className='event-details-buttons'>
-								<Link to='/events' className='btn btn-success btn-one'>
+								<Button onClick={this.goBack} className='btn btn-event-details-back btn-one'>
 									Volver
-								</Link>
+								</Button>
 								{this.state.loggedInUser && (
 									<Button
 										onClick={this.handleEventSign}
 										disabled={isAttending}
-										className='btn btn-success btn-one'>
+										className='btn btn-event-details-back btn-one'>
 										Apuntarme
 									</Button>
 								)}
@@ -202,15 +200,14 @@ class EventDetails extends Component {
 							{this.props.loggedInUser && (
 								<Button
 									onClick={() => this.handleModal(true)}
-									variant='success'
 									block
 									style={{ marginBottom: '20px' }}
 									className='btn-one'>
-									Dejar Rese&ntilde;a
+									Dejar comentario
 								</Button>
 							)}
 						
-							<h4>Rese&#241;as: </h4>
+							<h4>Comentarios: </h4>
 							{this.state.reviews && this.state.reviews.map(review => <div className="review-box"><p> <strong>Autor:</strong>  {review.author.username}</p>  <p> {review.text}</p> </div>)}
 							
 						</Col>
@@ -228,7 +225,6 @@ class EventDetails extends Component {
 					</Modal>
 
 					<Toast
-						variant='success'
 						onClose={() => this.handletoast(false)}
 						show={this.state.toast.show}
 						delay={4000}

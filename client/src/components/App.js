@@ -11,7 +11,6 @@ import AuthService from './../service/auth.service'
 import Home from './pages/home/Home'
 import Navigation from './ui/navbar/Navbar'
 import UserList from './pages/usersList/UsersList'
-// import UsersDetails from './pages/usersDetails/UsersDetails'
 import GameList from './pages/gameList/GameList'
 import GameDetails from './pages/game-details/GameDetails'
 import EventsList from './pages/eventList/EventList'
@@ -51,8 +50,6 @@ class App extends Component {
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
             <Route path="/users" exact render={() => <UserList loggedInUser={this.state.loggedInUser} />} />
-            {/* <Route path="/users/:userId._id/profile-ifo" exact render={() => <UsersDetails loggedInUser={this.state.loggedInUser} />} /> */}
-
 
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />

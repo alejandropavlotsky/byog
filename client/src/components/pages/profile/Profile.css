@@ -1,4 +1,4 @@
-.profile-game-details, .profile-event-details{
+.profile-game-details{
     border: 1px solid white;
     border-radius: 4px;
     padding: 8px;
@@ -27,4 +27,41 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 40px;
+}
+.profile-event-details{
+    padding: 8px;
+    margin: 8px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+    background-color: #f5f5bd;
+    height: 180px;
+    border: none;
+    border-radius: 0;
+    transition: .3s all;
+}
+.profile-event-details:hover{
+    transform: scale(1.05);
+}
+.profile-event-details p{
+    color: black;
+}
+.btn-edit-event{
+    color: black;
+}
+.btn-game-title{
+    background-color: transparent;
+}
+.edit-btn{
+    border: none;
+}
+.edit-btn:hover{
+    border: none;
+    background-color: #2a9d8f;
+}
+.game-button{
+    color: #f4a261;
+    text-transform: uppercase;
 }

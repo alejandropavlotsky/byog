@@ -26,7 +26,13 @@ class GameDetails extends Component {
 		}
 		this.reviewService = new ReviewService()
 		this.gameService = new GameService()
-    }
+        this.goBack = this.goBack.bind(this);
+
+	}
+	
+
+	goBack(){this.props.history.goBack()}
+	
     handleModal = visible => this.setState({ modalShow: visible })
 
     updateReviews(newReview) {
@@ -54,9 +60,9 @@ class GameDetails extends Component {
 				<Row as='article'>
 					<Col md={{ span: 5, offset: 1 }} className='image-button-game-detail'>
 						<img src={this.state.gameImg} alt={this.state.title} />
-						<Link to='/games' className='btn btn-success'>
+						<Button onClick={this.goBack} className='btn btn-game-details btn-block btn-sm btn-one'>
 							Volver
-						</Link>
+						</Button>
 					</Col>
 					<Col md={{ span: 5 }}>
 						<h4>Detalles</h4>
@@ -107,16 +113,15 @@ class GameDetails extends Component {
 							<strong>Idioma:</strong> {this.state.language}
 						</p>
 
-						{this.state.loggedInUser && (
+						{/* {this.state.loggedInUser && (
 							<Button
 								onClick={() => this.handleModal(true)}
-								variant='success'
 								block
 								style={{ marginBottom: '20px' }}
 								className='btn-one'>
 								Dejar comentario
 							</Button>
-                        )}
+                        )} */}
                         {/* <h4>Comentarios</h4>
                         {this.state.games && this.state.games.map(review => <div className="review-box"> <p> <strong>Autor: </strong> {review.author.username} </p> <p>{review.text}</p> </div>)} */}
 					</Col>

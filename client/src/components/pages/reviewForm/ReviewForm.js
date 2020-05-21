@@ -37,8 +37,7 @@ class ReviewForm extends Component {
             .catch(err => console.log(err))
         
     }
-    // .then(response => this.props.updateReviews(response.data))
-    // .catch(err => console.log(err))
+
 
     render() {
 
@@ -51,8 +50,8 @@ class ReviewForm extends Component {
                         <Form.Label>Comentario</Form.Label>
                         <Form.Control name="text" type="text" size="sm" value={this.state.text} onChange={this.handleInputChange} />
                     </Form.Group>
-                    <Button variant="success" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }}>Cerrar</Button>
-                    <Button variant="success" type="submit">Postear Comentario</Button>
+                    <Button className="btn-one" onClick={() => this.props.closeModal()} style={{ marginRight: '10px' }}>Cerrar</Button>
+                    <Button className="btn-one" type="submit">Postear Comentario</Button>
                 </Form>
             </Container>
         )

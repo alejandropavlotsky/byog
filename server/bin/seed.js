@@ -20,49 +20,49 @@ const users = [
     {
         username: "Alejandro",
         password: bcrypt.hashSync('123', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://i.pinimg.com/originals/73/16/f5/7316f550de9ca0045e3d8d98a5bb5e44.png",
         favorites: []
     },
     {
         username: "Emanuel",
         password: bcrypt.hashSync('456', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://images.pexels.com/photos/1680317/pexels-photo-1680317.jpeg",
         favorites: []
     },
     {
         username: "Erica",
         password: bcrypt.hashSync('135', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://i.pinimg.com/originals/85/93/80/8593808c39018c985ffbab740e1f474b.jpg",
         favorites: []
     },
     {
         username: "Hilario",
         password: bcrypt.hashSync('246', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://manageyourpad.com/wp-content/uploads/2017/04/guy2.jpg",
         favorites: []
     },
     {
         username: "Solano",
         password: bcrypt.hashSync('357', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://upload.wikimedia.org/wikipedia/commons/9/93/Guy_de_Maupassant_fotograferad_av_Félix_Nadar_1888.jpg",
         favorites: []
     },
     {
         username: "Blanca",
         password: bcrypt.hashSync('468', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://expertphotography.com/wp-content/uploads/2018/10/cool-profile-pictures-retouching-1.jpg",
         favorites: []
     },
     {
         username: "Ornella",
         password: bcrypt.hashSync('579', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://www.shivom.io/wp-content/uploads/2018/10/beautiful-blur-blurred-background-733872.jpg",
         favorites: []
     },
     {
         username: "Claus",
         password: bcrypt.hashSync('680', salt),
-        userImage: "https://www.vexels.com/media/users//3/145908/raw/52eabf633ca6414e60a7677b0b917d92.jpg",
+        userImage: "https://image.freepik.com/free-photo/front-view-man-holding-german-flag_23-2148270276.jpg",
         favorites: []
     }
 ]

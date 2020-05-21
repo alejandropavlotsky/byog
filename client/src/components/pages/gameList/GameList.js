@@ -50,6 +50,13 @@ class GameList extends Component {
 		this.setState({ toast: toastCopy })
 	}
 
+	// handleFavToast = (visible, text = 'Se ha agreagado el juego a tu lista de favoritos') => {
+	// 	const toastFavCopy = { ...this.state.toast }
+	// 	toastFavCopy.show = visible
+	// 	toastFavCopy.text = text
+	// 	this.setState({ toast: toastFavCopy })
+	// }
+
 	filteredSearch = str => {
 		const { gamesCopy } = this.state
 		const filteredresults = gamesCopy.filter(game => game.title.toLowerCase().includes(str.toLowerCase()))
@@ -81,7 +88,6 @@ class GameList extends Component {
 					{this.props.loggedInUser && (
 						<Button
 							onClick={() => this.handleModal(true)}
-							variant='success'
 							block
 							style={{ marginBottom: '20px' }}
 							className='btn-one'>
@@ -107,7 +113,6 @@ class GameList extends Component {
 				</Modal>
 
 				<Toast
-					variant='success'
 					onClose={() => this.handletoast(false)}
 					show={this.state.toast.show}
 					delay={4000}

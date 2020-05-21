@@ -40,7 +40,7 @@ class Login extends Component {
         this.authService.login(this.state.loginInfo)
             .then(response => {
                 this.props.setTheUser(response.data)
-                this.props.history.push('/')
+                this.props.history.push('/profile')
             })
             .catch(err => {
                 err.response.status === 400 && this.setState({ errorMessage: err.response.data.message })
@@ -76,7 +76,7 @@ class Login extends Component {
                                 style={{ display: this.state.errorMessage ? 'block' : 'none' }}
                             >{this.state.errorMessage}</p>
 
-                            <Button variant="success" className="btn-one" type="submit">Iniciar sesión</Button>
+                            <Button className="btn-one" type="submit">Iniciar sesión</Button>
                         </Form>
 
                         <p><small>¿No tienes cuenta? <Link to="/signup">Regístrate</Link></small></p>

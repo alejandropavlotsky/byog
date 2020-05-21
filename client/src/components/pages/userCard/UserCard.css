@@ -1,0 +1,17 @@
+.card-image-user{
+    height: 200px;
+    object-fit: cover;
+}
+@media (max-width: 991px){
+    .card-image-user {
+        height: 300px;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+@media (max-width: 767px){
+    .card-image-user {
+        height: auto;
+        object-fit: cover;
+    }
+}

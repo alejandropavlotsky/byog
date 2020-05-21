@@ -17,7 +17,7 @@
     width: 100%;
 }
 .review-box{
-    background-color: #29a744;
+    background-color: #2a9d8f;
     border-radius: 4px;
     border: none;
     text-align: center;
@@ -26,4 +26,12 @@
 }
 .review-box p{
     width:100%;
+}
+
+.btn-event-details-back{
+    border:none;
+}
+.btn-event-details-back:hover{
+    border:none;
+    background-color: #2a9d8f;
 }

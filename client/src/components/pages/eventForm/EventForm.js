@@ -118,13 +118,12 @@ class EventForm extends Component {
 					</Form.Group>
 
 					<Button
-						variant='success'
 						className='btn-one'
 						onClick={() => this.props.closeModal()}
 						style={{ marginRight: '10px' }}>
 						Cerrar
 					</Button>
-					<Button variant='success' className='btn-one' type='submit'>
+					<Button className='btn-one' type='submit'>
 						{this.props.title ? 'Actualizar evento' : 'Crear Evento'}
 					</Button>
 				</Form>
