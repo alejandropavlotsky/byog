@@ -81,6 +81,12 @@ class Profile extends Component {
         this.props.loggedInUser ? this.getProfileInfo(this.props.loggedInUser._id) : this.getProfileInfo(this.props.match.params.userId)
     }
 
+    componentDidUpdate(prevProps) {
+        if (prevProps.match && prevProps.match.params && prevProps.match.params.userId && this.props.loggedInUser) {
+            this.getProfileInfo(this.props.loggedInUser._id)
+        }
+    }
+
 
     render() {
         this.state.profileData && 
@@ -151,15 +157,16 @@ class Profile extends Component {
                                 {this.props.loggedInUser ? <h1>Mis Juegos Favoritos</h1> : <div className="back-button-users"><h1>Los Favoritos de {this.state.profileData.user.username}</h1></div>}
                                     <Row className="justify-content-center">
                                 {
-                                        this.state.profileData.user && this.state.profileData.user.favorites.length > 0 ?
-                                            this.state.profileData.user.favorites.map(fav =>
-                                                <Col md={3} key={fav._id} className="profile-game-details">
-                                                    <p>{fav.title}</p>
-                                                    <img src={fav.gameImg} alt="gameImg" className="profile-game-img"/>
-                                                    {this.state.profileData.user._id && this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn edit-btn btn-sm btn-one">Quitar de favoritos</Button>}
-                                                </Col>)
+                                    this.state.profileData.user.favorites.length ?
+                                    this.state.profileData.user.favorites.map(fav =>
+                                        <Col md={3} key={fav._id} className="profile-game-details">
+                                            <p>{fav.title}</p>
+                                            <img src={fav.gameImg} alt="gameImg" className="profile-game-img" />
+                                            {this.props.loggedInUser && this.props.loggedInUser._id === this.state.profileData.user._id && <Button onClick={() => this.deleteFavorite(fav._id)} className="btn edit-btn btn-sm btn-one">Quitar de favoritos</Button>}
+                                        </Col>)
+                                        
                                         :
-                                        this.props.loggedInUser && this.state.profileData.user &&
+                                        this.props.loggedInUser &&
                                         <p>No tienes juegos agregados a tu lista de favoritos. Ve a la sección <Link to="/games" className="game-button"> juegos</Link> y agrega algunos </p>
                                 }
                                     </Row>

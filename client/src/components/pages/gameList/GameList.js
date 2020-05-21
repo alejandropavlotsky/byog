@@ -33,12 +33,8 @@ class GameList extends Component {
 	}
 
 	addFavorite = favorite => {
-		let favoritesCopy = [...this.state.favorites]
-		if (!this.state.favorites.some(alreadyFav => alreadyFav._id === favorite)) {
-			favoritesCopy = [...favoritesCopy, favorite]
-			this.setState({ ...this.state, favorites: favoritesCopy }, () => {
-				this.userService.editUser(this.props.loggedInUser._id, this.state)
-			})
+		if (!this.state.favorites.some(alreadyFav => alreadyFav === favorite)) {
+				this.userService.addFavorite(this.props.loggedInUser._id, { newFavoriteId: favorite })
 		}
 	}
 
@@ -50,12 +46,7 @@ class GameList extends Component {
 		this.setState({ toast: toastCopy })
 	}
 
-	// handleFavToast = (visible, text = 'Se ha agreagado el juego a tu lista de favoritos') => {
-	// 	const toastFavCopy = { ...this.state.toast }
-	// 	toastFavCopy.show = visible
-	// 	toastFavCopy.text = text
-	// 	this.setState({ toast: toastFavCopy })
-	// }
+
 
 	filteredSearch = str => {
 		const { gamesCopy } = this.state

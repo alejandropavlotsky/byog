@@ -43,7 +43,8 @@ class GameDetails extends Component {
     }
 
 	getGameInfo() {
-		console.log(this.props.match.params)
+		this.state.loggedInUser &&
+		console.log("el id del juego es: ", this.props.match.params.gameId, "el user es: ", this.props.loggedInUser)
 		const id = this.props.match.params.gameId
 		this.gameService.getGame(id).then(response => this.setState(response.data)).catch(err => console.log(err))
 	}

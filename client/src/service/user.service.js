@@ -12,5 +12,6 @@ export default class services {
     getUserById = userId => this.service.get(`/${userId}`)
     getProfileInfo = userId => this.service.get(`/${userId}/profile-info`)
     editUser = (userId, theEditedUser) => this.service.post(`/${userId}/edit`, theEditedUser)
+    addFavorite = (userId, newFavorite) => this.service.put(`/${userId}/add-favorite`, newFavorite)
     deleteFavorite = (userId, favId) => this.service.delete(`/${userId}/remove-favorite/${favId}`)
 }

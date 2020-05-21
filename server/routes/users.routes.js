@@ -42,6 +42,19 @@ router.post('/:userId/edit', ensureLoggedIn(), (req, res, next) => {
         .catch(err => next(new Error(err)))
 })
 
+router.put('/:userId/add-favorite', ensureLoggedIn(), (req, res, next) => {
+    User.findById(req.params.userId)
+        .then((user) => {
+            user.favorites.push(req.body.newFavoriteId)
+            User.findByIdAndUpdate(req.params.userId, user)
+                .then(response => res.json(response))
+                .catch(err => next(new Error(err)))
+            
+        })
+        .catch(err => next(new Error(err)))
+})
+
+
 router.delete('/:userId/remove-favorite/:favId', ensureLoggedIn(), (req, res, next) => {
     User.findById(req.params.userId)
         .populate('favorites')

@@ -45,7 +45,7 @@ class App extends Component {
 
           <Switch>
             <Route path="/" exact render={props => <Home {...props}/>}/>
-            <Route path="/games" exact render={() => <GameList loggedInUser={this.state.loggedInUser} />} />
+            <Route path="/games" exact render={props => <GameList {...props} setTheUser={this.setTheUser} loggedInUser={this.state.loggedInUser} />} />
             <Route path="/games/:gameId/details" exact render={props => <GameDetails {...props} />} />
             <Route path="/events" exact render={() => <EventsList loggedInUser={this.state.loggedInUser} />} />
             <Route path="/events/:eventId/details" exact render={props => <EventDetails {...props} loggedInUser={this.state.loggedInUser} />} />
@@ -54,7 +54,7 @@ class App extends Component {
             <Route path="/signup" render={props => <Signup {...props} setTheUser={this.setTheUser} />} />
             <Route path="/login" render={props => <Login {...props} setTheUser={this.setTheUser} />} />
             <Route path="/profile" exact render={() => this.state.loggedInUser ? <Profile loggedInUser={this.state.loggedInUser} /> : <Redirect to="/" />} />
-            <Route path="/users/:userId" render={props => this.state.loggedInUser ? <Profile {...props} /> : <Redirect to="/login" />} />
+            <Route path="/users/:userId" exact render={props => this.state.loggedInUser ? <Profile {...props} /> : <Redirect to="/login" />} />
           </Switch>
 
         </main>

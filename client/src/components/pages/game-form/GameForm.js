@@ -25,7 +25,7 @@ class GameForm extends Component {
 			gameTime: props.gameTime || '',
 			difficulty: props.difficulty || utils[0].label,
 			price: props.price || '',
-			language: props.language || 'Español',
+			language: props.language || 'Espanol',
 			owner: props.loggedInUser._id
 		}
 		this.gameService = new GameService()

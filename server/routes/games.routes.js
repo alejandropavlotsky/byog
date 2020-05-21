@@ -16,7 +16,6 @@ router.get('/:gameId/details', (req, res, next) => {
     Games.findById(req.params.gameId)
         .then(data => res.json(data))
         .catch(err => next(new Error(err)))
-
 })
 
 router.put('/:gameId/edit', ensureLoggedIn(), (req, res, next) => {
