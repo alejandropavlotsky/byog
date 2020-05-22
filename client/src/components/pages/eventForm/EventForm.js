@@ -35,7 +35,7 @@ class EventForm extends Component {
 		e.preventDefault()
 		
 		const { gameTimeAsDate, gameHourAsDate } = this.state
-		const gameHourMoment = moment(gameHourAsDate).parseZone()
+		const gameHourMoment = moment(gameHourAsDate).parseZone().utc().subtract('hours', 2)
 		const gameDate = moment(gameTimeAsDate).parseZone().hour(gameHourMoment.hour()).minute(gameHourMoment.minute())
 		if (this.props.title) {
 			this.eventService
